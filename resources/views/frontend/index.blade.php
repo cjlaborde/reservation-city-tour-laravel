@@ -15,11 +15,11 @@
                 <div class="col-md-3 col-sm-6">
 
                     <div class="thumbnail">
-                        <img class="img-responsive" src="{{ $object->photos->first()->path ?? null }}" alt="..."> <!-- Lecture 14 src -->
+                        <img class="img-responsive" src="{{ $object->photos->first()->path }}" alt="..."> <!-- Lecture 14 src -->
                         <div class="caption">
                             <h3>{{ $object->name }} <!-- Lecture 14 -->  <small>{{ $object->city->name  }}<!-- Lecture 14 --></small> </h3>
                             <p>{{ str_limit($object->description,100) }}<!-- Lecture 14 --></p>
-                            <p><a href="{{ route('object') }}" class="btn btn-primary" role="button">Details</a></p>
+                            <p><a href="{{ route('object',['id'=>$object->id]) }}" class="btn btn-primary" role="button">Details</a></p> <!-- Lecture 15 ['id'=>$object->id] -->
                         </div>
                     </div>
                 </div>
@@ -30,6 +30,7 @@
         </div>
 
     @endforeach <!-- Lecture 14 -->
+    {{ $objects->links() }} <!-- Lecture 15 -->
 
 </div>
 @endsection <!-- Lecture 5  -->

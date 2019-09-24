@@ -16,7 +16,16 @@ class FrontendRepository implements FrontendRepositoryInterface  {   /* Lecture 
     /* Lecture 12 */
     public function getObjectsForMainPage()
     {
-        return TouristObject::all();
+        // return TouristObject::all(); /* Lecture 15 */
+        return TouristObject::with(['city','photos'])->ordered()->paginate(8); /* Lecture 15 */
     }
+
+
+    /* Lecture 15 */
+    public function getObject($id)
+    {
+        return TouristObject::find($id); /* Lecture 15 */
+    }
+
 
 }
