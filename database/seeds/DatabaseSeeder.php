@@ -1,4 +1,9 @@
 <?php
+/*
+|--------------------------------------------------------------------------
+| database/seeds/DatabaseSeeder.php *** Copyright netprogs.pl | available only at Udemy.com | further distribution is prohibited  ***
+|--------------------------------------------------------------------------
+*/
 
 use Illuminate\Database\Seeder;
 
@@ -18,6 +23,12 @@ class DatabaseSeeder extends Seeder
         $this->call(NotificationsTableSeeder::class); /* Lecture 10 */
         $this->call(ArticlesTableSeeder::class); /* Lecture 10 */
         $this->call(CommentsTableSeeder::class); /* Lecture 10 */
+        $this->call(LikeablesTableSeeder::class); /* Lecture 11 */
+        $this->call(PhotosTableSeeder::class); /* Lecture 11 */
+        $this->call(RoomsTableSeeder::class); /* Lecture 11 */
+        $this->call(ReservationsTableSeeder::class); /* Lecture 11 */
+        $this->call(RolesTableSeeder::class); /* Lecture 11 */
+        $this->call(RoleUserTableSeeder::class); /* Lecture 11 */
 
     }
 }
