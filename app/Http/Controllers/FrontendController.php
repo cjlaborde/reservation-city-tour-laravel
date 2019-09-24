@@ -3,13 +3,23 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Enjoythetrip\Interfaces\FrontendRepositoryInterface; /* Lecture 12 Lecture 13 FrontendRepositoryInterface  */
 
 class FrontendController extends Controller
 {
+    /* Lecture 12 */
+    public function __construct(FrontendRepositoryInterface $frontendRepository) /* Lecture 13 FrontendRepositoryInterface */
+    {
+        $this->fR = $frontendRepository;
+    }
+
+
     /* Lecture 6 */
     public function index()
     {
-        return view('frontend.index');
+        $objects = $this->fR->getObjectsForMainPage(); /* Lecture 12 */
+        //dd($objects);  /* Lecture 12 */
+        return view('frontend.index',['objects'=>$objects]); /* Lecture 12 second argument */
     }
 
     /* Lecture 6 */
@@ -41,5 +51,6 @@ class FrontendController extends Controller
     {
         return view('frontend.roomsearch');
     }
+
 
 }
