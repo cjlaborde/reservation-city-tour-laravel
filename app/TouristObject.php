@@ -27,12 +27,14 @@ class TouristObject extends Model
         return $this->belongsTo('App\City');
     }
     /* Lecture 14 */
+    # users have many images
     public function photos()
     {
         return $this->morphMany('App\Photo', 'photoable');
     }
 
     /* Lecture 16 */
+    // Many uses can like an TouristObject hence many to many morphToMany
     public function users()
     {
         return $this->morphToMany('App\User', 'likeable');

@@ -13,4 +13,13 @@ use Illuminate\Database\Eloquent\Model; /* Lecture 14 */
 class City extends Model
 {
     //protected $table = 'table_name'; /* Lecture 14 */
+
+
+    /* Lecture 19 */
+    public function rooms()
+    {
+        return $this->hasManyThrough('App\Room', 'App\TouristObject','city_id','object_id');
+    }
+
+
 }

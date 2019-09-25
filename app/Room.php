@@ -12,4 +12,18 @@ class Room extends Model
     {
         return $this->morphMany('App\Photo', 'photoable');
     }
+
+    /* Lecture 17 */
+    public function object()
+    {
+        return $this->belongsTo('App\TouristObject','object_id');
+    }
+
+    /* Lecture 19 */
+    public function reservations()
+    {
+        return $this->hasMany('App\Reservation');
+    }
+
+
 }

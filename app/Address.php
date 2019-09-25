@@ -8,4 +8,3 @@ class Address extends Model
 {
     //
 }
-

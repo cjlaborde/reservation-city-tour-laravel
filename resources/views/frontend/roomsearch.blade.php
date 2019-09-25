@@ -5,30 +5,30 @@
 
     <h1 class="text-center">Available rooms</h1>
 
-    <?php for ($i = 1; $i <= 3; $i++): ?>
+    @foreach( $city->rooms->chunk(4) as $chunked_rooms ) <!-- Lecture 19 -->
 
         <div class="row">
 
-            <?php for ($j = 1; $j <= 4; $j++): ?>
+            @foreach( $chunked_rooms as $room ) <!-- Lecture 19 -->
 
                 <div class="col-md-3 col-sm-6">
 
                     <div class="thumbnail">
-                        <img class="img-responsive img-circle" src="http://lorempixel.com/800/400/nightlife/?x=<?= mt_rand(1, 9999999) ?>" alt="...">
+                        <img class="img-responsive img-circle" src="{{ $room->photos->first()->path ?? $placeholder /* Lecture 19 */ }}" alt="...">
                         <div class="caption">
-                            <h3>Lorem ipsum  <small class="orange bolded">250$</small> </h3>
-                            <p>Lorem impsum dolor sit amet. Lorem impsum dolor sit amet.</p>
-                            <p><a href="{{ route('room') }}" class="btn btn-primary" role="button">Details</a><a href="{{ route('room') }}#reservation" class="btn btn-success pull-right" role="button">Reservation</a></p>
+                            <h3>Nr {{ $room->room_number /* Lecture 19 */ }} <small class="orange bolded">{{ $room->price /* Lecture 19 */ }}$</small> </h3>
+                            <p>{{ str_limit($room->description,80) /* Lecture 19 */ }}</p>
+                            <p><a href="{{ route('room',['id'=>$room->id]/* Lecture 19 */) }}" class="btn btn-primary" role="button">Details</a><a href="{{ route('room',['id'=>$room->id]/* Lecture 19 */) }}#reservation" class="btn btn-success pull-right" role="button">Reservation</a></p>
                         </div>
                     </div>
                 </div>
 
-            <?php endfor; ?>
+            @endforeach <!-- Lecture 19 -->
 
 
         </div>
 
-    <?php endfor; ?>
+    @endforeach <!-- Lecture 19 -->
 
 </div>
 @endsection <!-- Lecture 5  -->

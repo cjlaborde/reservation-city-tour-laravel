@@ -15,6 +15,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         /* Lecture 16 */
+        // placeholder = path to the actual image
         View::composer('frontend.*', function ($view) {
             $view->with('placeholder', asset('images/placeholder.jpg'));
             });

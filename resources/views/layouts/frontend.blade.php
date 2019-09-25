@@ -1,3 +1,8 @@
+<!--
+|--------------------------------------------------------------------------
+| resources/views/layouts/frontend.blade.php *** Copyright netprogs.pl | available only at Udemy.com | further distribution is prohibited  ***
+|--------------------------------------------------------------------------
+-->
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -18,6 +23,12 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}"> <!-- Lecture 5 -->
+
+    <!-- Lecture 17 -->
+    <script>
+        var base_url = '{{ url('/') }}';
+    </script>
+
 </head>
 <body>
 
@@ -30,7 +41,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="./">Home</a>
+            <a class="navbar-brand" href="{{ route('home') /* Lecture 17 */ }}">Home</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
         @auth <!-- Lecture 7 -->
@@ -68,33 +79,40 @@
         <h1>Enjoy the trip!</h1>
         <p>A platform for tourists and owners of tourist facilities. Find the original place for the holidays!</p>
         <p>Place your home on the site and let yourself be found by many tourists!</p>
-        <form action="{{ route('roomSearch') }}" class="form-inline">
+        <form method="POST" <?php /* Lecture 18 */?> action="{{ route('roomSearch') }}" class="form-inline">
             <div class="form-group">
                 <label class="sr-only" for="city">City</label>
-                <input name="city" type="text" class="form-control autocomplete" id="city" placeholder="City">
+                <input name="city" value="{{ old('city') /* Lecture 19 */ }}" type="text" class="form-control autocomplete" id="city" placeholder="City">
             </div>
             <div class="form-group">
                 <label class="sr-only" for="day_in">Check in</label>
-                <input name="check_in" type="text" class="form-control datepicker" id="check_in" placeholder="Check in">
+                <input name="check_in" value="{{ old('check_in') /* Lecture 19 */ }}" type="text" class="form-control datepicker" id="check_in" placeholder="Check in">
             </div>
 
             <div class="form-group">
                 <label class="sr-only" for="day_out">Check out</label>
-                <input name="check_out" type="text" class="form-control datepicker" id="check_out" placeholder="Check out">
+                <input name="check_out" value="{{ old('check_out') /* Lecture 19 */ }}" type="text" class="form-control datepicker" id="check_out" placeholder="Check out">
             </div>
             <div class="form-group">
                 <select name="room_size" class="form-control">
                     <option>Room size</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
+
+                    <!-- Lecture 19 -->
+                    @for($i=1;$i<=5;$i++)
+                        @if( old('room_size') == $i )
+                            <option selected value="{{$i}}">{{$i}}</option>
+                        @else
+                            <option value="{{$i}}">{{$i}}</option>
+                        @endif
+                    @endfor
+
                 </select>
             </div>
             <button type="submit" class="btn btn-warning">Search</button>
 
             <!-- Lecture 6: deleted <input type="hidden" name="view" value="roomsearch"> -->
+
+        {{ csrf_field() }} <!-- Lecture 18 -->
 
         </form>
 
