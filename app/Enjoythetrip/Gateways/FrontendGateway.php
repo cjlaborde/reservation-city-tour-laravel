@@ -51,6 +51,7 @@ class FrontendGateway {
             {
 
                 /* Lecture 19 */
+                # check if room size number same as in database
                 foreach ($result->rooms as $k=>$room)
                 {
                    if( (int) $request->input('room_size') > 0 )
@@ -61,6 +62,7 @@ class FrontendGateway {
                         }
                    }
 
+                   # Check if date of reservation is less than or More than the one added in search engine check the database.
                     foreach($room->reservations as $reservation)
                     {
 

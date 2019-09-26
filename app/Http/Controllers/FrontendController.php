@@ -45,9 +45,22 @@ class FrontendController extends Controller
     }
 
     /* Lecture 6 */
-    public function room()
+    public function room($id /* Lecture 20 */)
     {
-        return view('frontend.room');
+        $room = $this->fR->getRoom($id); /* Lecture 20 */
+        return view('frontend.room',['room'=>$room]/* Lecture 20 */);
+    }
+
+
+    /* Lecture 20 */
+    public function ajaxGetRoomReservations($id)
+    {
+
+        $reservations = $this->fR->getReservationsByRoomId($id);
+
+        return response()->json([
+            'reservations'=>$reservations
+        ]);
     }
 
     /* Lecture 6 */

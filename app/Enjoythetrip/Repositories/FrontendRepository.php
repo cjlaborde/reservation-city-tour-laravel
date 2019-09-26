@@ -3,7 +3,7 @@
 namespace App\Enjoythetrip\Repositories; /* Lecture 12 */
 
 use App\Enjoythetrip\Interfaces\FrontendRepositoryInterface;  /* Lecture 13 */
-use App\{TouristObject,City/*Lecture 17*/}; /* Lecture 12 */
+use App\{TouristObject,City/*Lecture 17*/,Room/* Lecture 20 */,Reservation/* Lecture 20 */}; /* Lecture 12 */
 
 /* Lecture 12 */
 class FrontendRepository implements FrontendRepositoryInterface  {   /* Lecture 13 implements FrontendRepositoryInterface */
@@ -39,6 +39,21 @@ class FrontendRepository implements FrontendRepositoryInterface  {   /* Lecture 
     {
         // rooms.object.photos  for json mobile
         return  City::with(['rooms.reservations','rooms.photos','rooms.object.photos'])->where('name',$city)->first() ?? false;  /* Lecture 19 */
+    }
+
+
+    /* Lecture 20 */
+    public function getRoom($id)
+    {
+        // with - for mobile json
+        return  Room::with(['object.address'])->find($id);
+    }
+
+
+    /* Lecture 20 */
+    public function getReservationsByRoomId( $room_id )
+    {
+        return  Reservation::where('room_id',$room_id)->get();
     }
 
 

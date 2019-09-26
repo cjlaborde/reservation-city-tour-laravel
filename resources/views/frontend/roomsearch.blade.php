@@ -5,6 +5,7 @@
 
     <h1 class="text-center">Available rooms</h1>
 
+    {{-- divide collection into 4 elements with chunk --}}
     @foreach( $city->rooms->chunk(4) as $chunked_rooms ) <!-- Lecture 19 -->
 
         <div class="row">

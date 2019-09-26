@@ -1,4 +1,5 @@
 <?php
+namespace App; /* Lecture 16 */
 
 use Illuminate\Database\Eloquent\Model; /* Lecture 16 */
 
