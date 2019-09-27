@@ -25,9 +25,10 @@ class FrontendController extends Controller
     }
 
     /* Lecture 6 */
-    public function article()
+    public function article($id/* Lecture 22 */)
     {
-        return view('frontend.article');
+        $article = $this->fR->getArticle($id); /* Lecture 22 */
+        return view('frontend.article',compact('article')/* Lecture 22 */);
     }
 
     /* Lecture 6 */
@@ -69,13 +70,12 @@ class FrontendController extends Controller
         /* Lecture 18 */
         if($city = $this->fG->getSearchResults($request))
         {
-            // dd($city);
             return view('frontend.roomsearch',['city'=>$city]);
         }
         else /* Lecture 18 */
         {
             if (!$request->ajax())
-            return redirect('/')->with('norooms', __('No offers were found matching the criteria'));
+                return redirect('/')->with('norooms', __('No offers were found matching the criteria'));
         }
 
     }

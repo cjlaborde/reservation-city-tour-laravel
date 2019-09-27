@@ -16,7 +16,7 @@ Route::get('/','FrontendController@index')->name('home'); /* Lecture 6 */
 Route::get(trans('routes.object').'/{id}','FrontendController@object')->name('object'); /* Lecture 5 Lecture 15 {id}  */
 Route::post(trans('routes.roomsearch'),'FrontendController@roomsearch')->name('roomSearch'); /* Lecture 5 Lecture 18 get->post */
 Route::get(trans('routes.room').'/{id}','FrontendController@room')->name('room'); /* Lecture 6 Lecture 19 {id} */
-Route::get(trans('routes.article'),'FrontendController@article')->name('article'); /* Lecture 6 */
+Route::get(trans('routes.article').'/{id}','FrontendController@article')->name('article'); /* Lecture 6 Lecture 22 {id} */
 Route::get(trans('routes.person'),'FrontendController@person')->name('person'); /* Lecture 6 */
 
 Route::get('/searchCities', 'FrontendController@searchCities'); /* Lecture 17 */

@@ -84,6 +84,7 @@
         var between = [];
         var currentDate = new Date(startDt);
         var end = new Date(endDt);
+        // add dates to the array with the range for the reservations
         while (currentDate <= end)
         {
             between.push( $.datepicker.formatDate('mm/dd/yy',new Date(currentDate)) );
@@ -119,6 +120,8 @@
             dates = [].concat.apply([], dates); /* Lecture 21 */   // flattened array
 
             /* Lecture 21 */
+            // will create an array of arrays with the date ranges between the function
+            // save all the dates in the form required by the date picker
             for (var i = 0; i <= dates.length - 1; i++)
             {
                 eventDates[dates[i]] = dates[i];
@@ -149,6 +152,7 @@
                         var tmp =  eventDates[$.datepicker.formatDate('mm/dd/yy', date)]; /* Lecture 21 */
                         //console.log(date);
                         if (tmp)
+                        // dates that are not clickable
                             return [false, 'unavaiable_date'];
                         else
                             return [true, ''];

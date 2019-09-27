@@ -145,16 +145,16 @@
 
     <section>
         <h2 class="red">Articles about the object / area</h2>
-        @foreach($object->articles as $article) <!-- Lecture 16 -->
-            <div class="articles-list">
-                <h4 class="top-buffer">{{ $article->title }} <!-- Lecture 16 --></h4>
-                <p><b> {{ $article->user->FullName }} <!-- Lecture 16 --></b>
-                    <i>{{ $article->created_at }} <!-- Lecture 16 --></i>
-                </p>
-                <p>{{ str_limit($article->content,250) }} <!-- Lecture 16 --> </p> <a href="{{ route('article') }}">More</a>
-            </div>
+    @foreach($object->articles as $article) <!-- Lecture 16 -->
+        <div class="articles-list">
+            <h4 class="top-buffer">{{ $article->title }} <!-- Lecture 16 --></h4>
+            <p><b> {{ $article->user->FullName }} <!-- Lecture 16 --></b>
+                <i>{{ $article->created_at }} <!-- Lecture 16 --></i>
+            </p>
+            <p>{{ str_limit($article->content,250) }} <!-- Lecture 16 --> </p> <a href="{{ route('article',['id'=>$article->id]/* Lecture 22 */) }}">More</a>
+        </div>
 
-        @endforeach <!-- Lecture 16 -->
+    @endforeach <!-- Lecture 16 -->
     </section>
 
     <a href="#" class="btn btn-primary btn-xs top-buffer">Like this object</a>

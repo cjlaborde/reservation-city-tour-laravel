@@ -1,1 +1,22 @@
-$(function(){$(".datepicker").datepicker()}),$(function(){$(".autocomplete").autocomplete({source:base_url+"/searchCities",minLength:2,select:function(e,t){}})});for(var eventDates={},dates=["02/15/2020","02/16/2020","02/25/2020"],i=0;i<=dates.length;i++)eventDates[new Date(dates[i])]=new Date(dates[i]);$(function(){$("#avaiability_calendar").datepicker({onSelect:function(e){""==$("#checkin").val()?$("#checkin").val(e):""==$("#checkout").val()?$("#checkout").val(e):""!=$("#checkout").val()&&($("#checkin").val(e),$("#checkout").val(""))},beforeShowDay:function(e){return eventDates[e]?[!1,"unavaiable_date"]:[!0,""]}})});
+
+$(function () {
+    $(".datepicker").datepicker();
+});
+
+
+$(function () {
+    $(".autocomplete").autocomplete({
+        source: base_url + "/searchCities", /* Lecture 17 */
+        minLength: 2,
+        select: function (event, ui) {
+
+//            console.log(ui.item.value);
+        }
+
+
+    });
+});
+
+
+
+//room.php /* Lecture 20 deleted code under this line */
