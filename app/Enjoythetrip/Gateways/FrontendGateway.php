@@ -9,7 +9,6 @@ class FrontendGateway {
 
     use \Illuminate\Foundation\Validation\ValidatesRequests; /* Lecture 25 */
 
-
     /* Lecture 17 */
     public function __construct(FrontendRepositoryInterface $fR )
     {
@@ -116,6 +115,52 @@ class FrontendGateway {
     }
 
 
+    /* Lecture 26 */
+    public function checkAvaiableReservations($room_id, $request)
+    {
+
+        $dayin = date('Y-m-d', strtotime($request->input('checkin')));
+        $dayout = date('Y-m-d', strtotime($request->input('checkout')));
+
+        $reservations = $this->fR->getReservationsByRoomId($room_id);
+
+        $avaiable = true;
+        foreach($reservations as $reservation)
+        {
+            if( $dayin >= $reservation->day_in
+                &&  $dayin <= $reservation->day_out
+            )
+            {
+                $avaiable = false;break;
+            }
+            elseif( $dayout >= $reservation->day_in
+                &&  $dayout <= $reservation->day_out
+            )
+            {
+                $avaiable = false;break;
+            }
+            elseif( $dayin <= $reservation->day_in
+                &&  $dayout >= $reservation->day_out
+            )
+            {
+                $avaiable = false;break;
+            }
+        }
+
+        return $avaiable;
+    }
+
+
+    /* Lecture 26 */
+    public function makeReservation($room_id, $city_id, $request)
+    {
+        $this->validate($request,[
+            'checkin'=>"required|string",
+            'checkout'=>"required|string"
+        ]);
+
+        return $this->fR->makeReservation($room_id, $city_id, $request);
+    }
 
 
 }
