@@ -3,7 +3,7 @@
 namespace App\Enjoythetrip\Repositories; /* Lecture 12 */
 
 use App\Enjoythetrip\Interfaces\FrontendRepositoryInterface;  /* Lecture 13 */
-use App\{TouristObject,City/*Lecture 17*/,Room/* Lecture 20 */,Reservation/* Lecture 20 */,Article/* Lecture 22 */}; /* Lecture 12 */
+use App\{TouristObject,City/*Lecture 17*/,Room/* Lecture 20 */,Reservation/* Lecture 20 */,Article/* Lecture 22 */,User/* Lecture 23 */,Comment/* Lecture 25 */}; /* Lecture 12 */
 
 /* Lecture 12 */
 class FrontendRepository implements FrontendRepositoryInterface  {   /* Lecture 13 implements FrontendRepositoryInterface */
@@ -85,6 +85,25 @@ class FrontendRepository implements FrontendRepositoryInterface  {   /* Lecture 
 
         return $likeable->users()->detach($request->user()->id);
     }
+
+
+    /* Lecture 25 */
+    public function addComment($commentable_id, $type, $request)
+    {
+        $commentable = $type::find($commentable_id);
+
+        $comment = new Comment;
+
+        $comment->content = $request->input('content');
+
+        $comment->rating = $type == 'App\TouristObject' ? $request->input('rating') : 0;
+
+        $comment->user_id = $request->user()->id;
+
+        return $commentable->comments()->save($comment);
+    }
+
+
 
 }
 

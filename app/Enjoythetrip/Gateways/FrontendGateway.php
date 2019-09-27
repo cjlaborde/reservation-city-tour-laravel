@@ -7,6 +7,8 @@ use App\Enjoythetrip\Interfaces\FrontendRepositoryInterface; /* Lecture 17 */
 /* Lecture 17 */
 class FrontendGateway {
 
+    use \Illuminate\Foundation\Validation\ValidatesRequests; /* Lecture 25 */
+
 
     /* Lecture 17 */
     public function __construct(FrontendRepositoryInterface $fR )
@@ -36,8 +38,6 @@ class FrontendGateway {
     /* Lecture 18 */
     public function getSearchResults($request)
     {
-
-        $request->flash(); // inputs for session for one request
 
         if( $request->input('city') != null)
         {
@@ -89,6 +89,8 @@ class FrontendGateway {
 
                 }
 
+                $request->flash(); // inputs for session for one request
+
                 /* Lecture 19 */
                 if(count($result->rooms)> 0)
                 return $result;  // filtered result
@@ -101,6 +103,20 @@ class FrontendGateway {
         return false;
 
     }
+
+
+    /* Lecture 25 */
+    public function addComment($commentable_id, $type, $request)
+    {
+        $this->validate($request,[
+            'content'=>"required|string"
+        ]);
+
+        return $this->fR->addComment($commentable_id, $type, $request);
+    }
+
+
+
 
 }
 

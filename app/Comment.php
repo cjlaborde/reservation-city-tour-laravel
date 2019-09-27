@@ -10,6 +10,7 @@ class Comment extends Model
 
     use Enjoythetrip\Presenters\CommentPresenter; /* Lecture 16 */
 
+    public $timestamps = false; /* Lecture 25 */
 
     /* Lecture 16 */
     public function commentable()
