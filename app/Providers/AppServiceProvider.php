@@ -33,5 +33,12 @@ class AppServiceProvider extends ServiceProvider
         {
             return new \App\Enjoythetrip\Repositories\FrontendRepository;
         });
+
+
+        /* Lecture 27 */
+        $this->app->bind(\App\Enjoythetrip\Interfaces\BackendRepositoryInterface::class,function()
+        {
+            return new \App\Enjoythetrip\Repositories\BackendRepository;
+        });
     }
 }
