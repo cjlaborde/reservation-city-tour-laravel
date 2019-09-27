@@ -1,13 +1,9 @@
 <?php
-/*
-|--------------------------------------------------------------------------
-| app/TouristObject.php *** Copyright netprogs.pl | available only at Udemy.com | further distribution is prohibited  ***
-|--------------------------------------------------------------------------
-*/
 
 namespace App; /* Lecture 12 */
 
 use Illuminate\Database\Eloquent\Model; /* Lecture 12 */
+use Illuminate\Support\Facades\Auth; /* Lecture 24 */
 
 /* Lecture 12 */
 class TouristObject extends Model
@@ -64,4 +60,12 @@ class TouristObject extends Model
     {
         return $this->hasMany('App\Article','object_id');
     }
+
+    /* Lecture 24 */
+    public function isLiked()
+    {
+        return $this->users()->where('user_id', Auth::user()->id)->exists();
+    }
+
+
 }

@@ -70,5 +70,21 @@ class FrontendRepository implements FrontendRepositoryInterface  {   /* Lecture 
     }
 
 
+    /* Lecture 24 */
+    public function like($likeable_id, $type, $request)
+    {
+        $likeable = $type::find($likeable_id);
+
+        return $likeable->users()->attach($request->user()->id);
+    }
+
+    /* Lecture 24 */
+    public function unlike($likeable_id, $type, $request)
+    {
+        $likeable = $type::find($likeable_id);
+
+        return $likeable->users()->detach($request->user()->id);
+    }
+
 }
 

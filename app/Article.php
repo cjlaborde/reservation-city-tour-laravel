@@ -3,6 +3,7 @@
 namespace App; /* Lecture 16 */
 
 use Illuminate\Database\Eloquent\Model; /* Lecture 16 */
+use Illuminate\Support\Facades\Auth; /* Lecture 24 */
 
 /* Lecture 16 */
 class Article extends Model
@@ -32,5 +33,11 @@ class Article extends Model
     public function object()
     {
         return $this->belongsTo('App\TouristObject','object_id');
+    }
+
+    /* Lecture 24 */
+    public function isLiked()
+    {
+        return $this->users()->where('user_id', Auth::user()->id)->exists();
     }
 }

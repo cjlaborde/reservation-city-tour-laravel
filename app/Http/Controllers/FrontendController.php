@@ -11,6 +11,9 @@ class FrontendController extends Controller
     /* Lecture 12 */
     public function __construct(FrontendRepositoryInterface $frontendRepository, FrontendGateway $frontendGateway /* Lecture 17 */) /* Lecture 13 FrontendRepositoryInterface */
     {
+
+        $this->middleware('auth')->only(['makeReservation','addComment','like','unlike']); /* Lecture 24 */
+
         $this->fR = $frontendRepository;
         $this->fG = $frontendGateway; /* Lecture 17 */
     }
@@ -35,7 +38,6 @@ class FrontendController extends Controller
     public function object($id) /* Lecture 15 $id */
     {
         $object = $this->fR->getObject($id); /* Lecture 15 */
-
         return view('frontend.object',['object'=>$object]); /* Lecture 16 second argument */
     }
 
@@ -89,6 +91,23 @@ class FrontendController extends Controller
         $results = $this->fG->searchCities($request);
 
         return response()->json($results);
+    }
+
+    /* Lecture 24 */
+    public function like($likeable_id, $type, Request $request)
+    {
+        $this->fR->like($likeable_id, $type, $request);
+
+        return redirect()->back();
+    }
+
+
+    /* Lecture 24 */
+    public function unlike($likeable_id, $type, Request $request)
+    {
+        $this->fR->unlike($likeable_id, $type, $request);
+
+        return redirect()->back();
     }
 
 

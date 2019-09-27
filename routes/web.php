@@ -22,6 +22,8 @@ Route::get(trans('routes.person').'/{id}','FrontendController@person')->name('pe
 Route::get('/searchCities', 'FrontendController@searchCities'); /* Lecture 17 */
 Route::get('/ajaxGetRoomReservations/{id}', 'FrontendController@ajaxGetRoomReservations'); /* Lecture 20 */
 
+Route::get('/like/{likeable_id}/{type}', 'FrontendController@like')->name('like'); /* Lecture 24 */
+Route::get('/unlike/{likeable_id}/{type}', 'FrontendController@unlike')->name('unlike'); /* Lecture 24 */
 
 Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){  /* Lecture 6 Lecture 7 'middleware'=>'auth' */
 

@@ -1,8 +1,3 @@
-<!--
-|--------------------------------------------------------------------------
-| resources/views/frontend/article.blade.php *** Copyright netprogs.pl | available only at Udemy.com | further distribution is prohibited  ***
-|--------------------------------------------------------------------------
--->
 @extends('layouts.frontend') <!-- Lecture 5  -->
 
 @section('content') <!-- Lecture 5  -->
@@ -45,7 +40,23 @@
     <hr>
 @endforeach <!-- Lecture 22 -->
 
-    <a href="#" class="btn btn-primary btn-xs">Like this article</a><br><br>
+    <!-- Lecture 24 -->
+    @auth
+
+        @if( $article->isLiked() )
+            <a href="{{ route('unlike',['id'=>$article->id,'type'=>'App\Article']) }}" class="btn btn-primary btn-xs top-buffer">Unlike this article</a>
+        @else
+            <a href="{{ route('like',['id'=>$article->id,'type'=>'App\Article']) }}" class="btn btn-primary btn-xs top-buffer">Like this article</a>
+        @endif
+
+    @else
+
+        <p><a href="{{ route('login') }}">Login to like this article</a></p>
+
+    @endauth
+
+
+    <br><br>
 
     <a class="btn btn-primary" role="button" data-toggle="collapse" href="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2">
         Add comment
