@@ -46,4 +46,10 @@ class User extends Authenticatable
     {
         return $this->morphMany('App\Photo', 'photoable');
     }
+
+    /* Lecture 23 */
+    public function comments()
+    {
+        return $this->hasMany('App\Comment');
+    }
 }

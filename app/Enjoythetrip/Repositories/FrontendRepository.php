@@ -63,6 +63,12 @@ class FrontendRepository implements FrontendRepositoryInterface  {   /* Lecture 
         return  Article::with(['object.photos','comments'])->find($id);
     }
 
+    /* Lecture 23 */
+    public function getPerson($id)
+    {
+        return  User::with(['objects','larticles','comments.commentable'])->find($id);
+    }
+
 
 }
 

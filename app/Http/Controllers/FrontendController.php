@@ -40,9 +40,10 @@ class FrontendController extends Controller
     }
 
     /* Lecture 6 */
-    public function person()
+    public function person($id/* Lecture 23 */)
     {
-        return view('frontend.person');
+        $user = $this->fR->getPerson($id); /* Lecture 23 */
+        return view('frontend.person', ['user'=>$user]/* Lecture 23 */);
     }
 
     /* Lecture 6 */
@@ -75,7 +76,7 @@ class FrontendController extends Controller
         else /* Lecture 18 */
         {
             if (!$request->ajax())
-                return redirect('/')->with('norooms', __('No offers were found matching the criteria'));
+            return redirect('/')->with('norooms', __('No offers were found matching the criteria'));
         }
 
     }

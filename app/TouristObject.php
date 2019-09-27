@@ -14,13 +14,14 @@ class TouristObject extends Model
 {
 
     protected $table = 'objects';
+
+    use Enjoythetrip\Presenters\ObjectPresenter; /* Lecture 23 */
+
     /* Lecture 15 */
     public function scopeOrdered($query)
     {
         return $query->orderBy('name', 'asc');
     }
-
-
     /* Lecture 14 */
     public function city()
     {
