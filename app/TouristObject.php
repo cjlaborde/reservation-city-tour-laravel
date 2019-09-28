@@ -10,6 +10,7 @@ class TouristObject extends Model
 {
 
     protected $table = 'objects';
+    public $timestamps = false; /* Lecture 44 */
 
     use Enjoythetrip\Presenters\ObjectPresenter; /* Lecture 23 */
 

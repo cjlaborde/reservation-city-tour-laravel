@@ -29,5 +29,16 @@ class Photo extends Model
         return $this->original['path'];
     }
 
+    /* Lecture 43 */
+    public static function imageRules($request,$type)
+    {
+        for ( $i = 0; $i <= count($request->file($type))-1 ; $i++ )
+        {
+            $rules["$type.$i"] = 'image|max:4000';
+        }
+
+        return $rules;
+    }
+
 
 }
