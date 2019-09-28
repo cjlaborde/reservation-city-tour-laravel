@@ -7,7 +7,7 @@
 /* Lecture 32 */
 function datesBetween(startDt, endDt) {
   var between = [];
-  var currentDate = new Date(startDt);
+  var currentDate = new Date(startDt); 
   var end = new Date(endDt);
 
   while (currentDate <= end) {

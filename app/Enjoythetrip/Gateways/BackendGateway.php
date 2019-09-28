@@ -1,9 +1,4 @@
 <?php
-/*
-|--------------------------------------------------------------------------
-| app/Enjoythetrip/Gateways/BackendGateway.php *** Copyright netprogs.pl | available only at Udemy.com | further distribution is prohibited  ***
-|--------------------------------------------------------------------------
-*/
 namespace App\Enjoythetrip\Gateways; /* Lecture 27 */
 
 use App\Enjoythetrip\Interfaces\BackendRepositoryInterface; /* Lecture 27 */
@@ -45,7 +40,7 @@ class BackendGateway {
     public function createCity($request)
     {
         $this->validate($request,[
-            'name'=>"required|string|unique:cities",
+        'name'=>"required|string|unique:cities",
         ]);
 
         $this->bR->createCity($request);
@@ -56,10 +51,31 @@ class BackendGateway {
     public function updateCity($request, $id)
     {
         $this->validate($request,[
-            'name'=>"required|string|unique:cities",
+        'name'=>"required|string|unique:cities",
         ]);
 
         $this->bR->updateCity($request, $id);
+    }
+
+
+    /* Lecture 39 */
+    public function saveUser($request)
+    {
+        $this->validate($request,[
+        'name'=>"required|string",
+        'surname'=>"required|string",
+        'email'=>"required|email",
+        ]);
+
+        if ($request->hasFile('userPicture'))
+        {
+            $this->validate($request,[
+            'userPicture'=>"image|max:100",
+
+            ]);
+        }
+
+        return $this->bR->saveUser($request);
     }
 
 
