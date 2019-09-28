@@ -14,6 +14,9 @@ class BackendController extends Controller
     /* Lecture 27 */
     public function __construct(BackendGateway $backendGateway, BackendRepositoryInterface $backendRepository)
     {
+
+        $this->middleware('CheckOwner')->only(['confirmReservation','saveRoom','saveObject','myObjects']);/* Lecture 36 */
+
         $this->bG = $backendGateway;
         $this->bR = $backendRepository;
     }

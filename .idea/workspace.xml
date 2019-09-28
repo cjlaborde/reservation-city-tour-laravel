@@ -3,11 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="9e02b088-3a8b-49bf-b2af-997ff41ccc83" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Enjoythetrip/Repositories/BackendRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Enjoythetrip/Repositories/BackendRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/BackendController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/BackendController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Controller.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Controller.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Providers/AuthServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/AuthServiceProvider.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/TouristObject.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/TouristObject.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Kernel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Policies/ReservationPolicy.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Policies/ReservationPolicy.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Role.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Role.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/auth/register.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/register.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/layouts/backend.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/backend.blade.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -156,7 +155,7 @@
       <workItem from="1569278276463" duration="15598000" />
       <workItem from="1569351740878" duration="12183000" />
       <workItem from="1569528772919" duration="13807000" />
-      <workItem from="1569620173972" duration="4544000" />
+      <workItem from="1569620173972" duration="6660000" />
     </task>
     <servers />
   </component>

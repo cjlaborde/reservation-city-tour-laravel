@@ -1,8 +1,3 @@
-<!--
-|--------------------------------------------------------------------------
-| resources/views/auth/register.blade.php *** Copyright netprogs.pl | available only at Udemy.com | further distribution is prohibited  ***
-|--------------------------------------------------------------------------
--->
 @extends('layouts.app')
 
 @section('content')
@@ -13,7 +8,7 @@
                     <div class="card-header">Register</div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('register') }}">
+                        <form {{ $novalidate /* Lecture 36 */ }} method="POST" action="{{ route('register') }}">
                             {{ csrf_field() }}
 
                             <div class="form-group row">
@@ -81,6 +76,19 @@
                                     <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
                                 </div>
                             </div>
+
+                            <!-- Lecture 36 -->
+                            <div class="form-group">
+                                <div class="col-md-6 offset-4">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" name="owner" value="1">
+                                            Register as a owner
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
 
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">

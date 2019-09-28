@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
+use App\{User,Role/* Lecture 36 */};
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
@@ -28,7 +27,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/admin';
+    protected $redirectTo = '/admin'; /* Lecture 7 */
 
     /**
      * Create a new controller instance.
@@ -49,10 +48,10 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'surname' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'name' => 'required|string|max:255',
+            'surname' => 'required|string|max:255', /* Lecture 7 */
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:6|confirmed',
         ]);
     }
 
@@ -64,11 +63,28 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        /* Lecture 36 */
+        $user =  User::create([
             'name' => $data['name'],
             'surname' => $data['surname'],
             'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+            'password' => bcrypt($data['password']),
         ]);
+
+        /* Lecture 36 */
+        if(!Role::where('name','owner')->exists())
+        {
+            Role::create(['name'=>'owner']);
+            Role::create(['name'=>'tourist']);
+            Role::create(['name'=>'admin']);
+        }
+
+        /* Lecture 36 */
+        if($data['owner'] ?? 0) $user->roles()->attach( Role::where('name','owner')->first()->id );
+        else
+        $user->roles()->attach( Role::where('name','tourist')->first()->id );
+
+
+        return $user; /* Lecture 36 */
     }
 }

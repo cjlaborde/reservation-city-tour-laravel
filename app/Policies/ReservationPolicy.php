@@ -24,8 +24,10 @@ class ReservationPolicy
     public function reservation(User $user, Reservation $reservation)
     {
         if($user->hasRole(['owner','admin']))
+        // room reservation belongs to user logged in.
         return $user->id === $reservation->room->object->user->id;
         else
+        // otherwise just provide id column
         return $user->id === $reservation->user_id;
     }
 }
