@@ -6,20 +6,23 @@
 */
 namespace App\Enjoythetrip\Gateways; /* Lecture 27 */
 
-use App\Enjoythetrip\Interfaces\BackendRepositoryInterface; /* Lecture 27 */ 
+use App\Enjoythetrip\Interfaces\BackendRepositoryInterface; /* Lecture 27 */
 
 
 /* Lecture 27 */
-class BackendGateway { 
-    
+class BackendGateway {
 
-    public function __construct(BackendRepositoryInterface $bR ) 
+
+    use \Illuminate\Foundation\Validation\ValidatesRequests; /* Lecture 37 */
+
+
+    public function __construct(BackendRepositoryInterface $bR )
     {
         $this->bR = $bR;
     }
-    
-    
-    
+
+
+
     public function getReservations($request)
     {
         if ($request->user()->hasRole(['owner','admin']))
@@ -30,14 +33,35 @@ class BackendGateway {
         }
         else
         {
-            
+
             $objects = $this->bR->getTouristReservations($request);
         }
-        
+
         return $objects;
     }
-    
+
+
+    /* Lecture 37 */
+    public function createCity($request)
+    {
+        $this->validate($request,[
+            'name'=>"required|string|unique:cities",
+        ]);
+
+        $this->bR->createCity($request);
+    }
+
+
+    /* Lecture 37 */
+    public function updateCity($request, $id)
+    {
+        $this->validate($request,[
+            'name'=>"required|string|unique:cities",
+        ]);
+
+        $this->bR->updateCity($request, $id);
+    }
+
 
 }
-
 

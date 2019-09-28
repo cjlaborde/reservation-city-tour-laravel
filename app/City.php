@@ -14,6 +14,9 @@ class City extends Model
 {
     //protected $table = 'table_name'; /* Lecture 14 */
 
+    protected $guarded = []; /* Lecture 38 */
+    public $timestamps = false; /* Lecture 38 */
+
 
     /* Lecture 19 */
     public function rooms()

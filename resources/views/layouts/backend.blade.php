@@ -48,6 +48,7 @@
         ?>
 
         </script>
+
     </head>
 
     <body>
@@ -117,6 +118,18 @@
 
                 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
+                    <!-- Lecture 38 -->
+                    @if ($errors->any())
+                    <br>
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    @endif
+
 
                     <br> <!-- Lecture 35 -->
 
@@ -143,6 +156,7 @@
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
         <script src="{{ asset('js/app.js') }}"></script> <!-- Lecture 5 -->
         <script src="{{ asset('js/admin.js') }}"></script> <!-- Lecture 5 -->
         @stack('scripts') <!-- Lecture 30 -->

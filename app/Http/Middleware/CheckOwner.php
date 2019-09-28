@@ -20,10 +20,11 @@ class CheckOwner
     {
         if( Auth::user()->hasRole(['owner','admin']) )
 
+        // if owner or admin it will be executed
         return $next($request);
 
         else
-
+        // otherwise will be redirected
         return redirect('/admin');
     }
 }

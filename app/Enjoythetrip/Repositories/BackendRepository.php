@@ -8,7 +8,7 @@
 namespace App\Enjoythetrip\Repositories; /* Lecture 27 */
 
 use App\Enjoythetrip\Interfaces\BackendRepositoryInterface;  /* Lecture 27 */
-use App\{TouristObject/* Lecture 28 */,Reservation/* Lecture 30 */};
+use App\{TouristObject/* Lecture 28 */,Reservation/* Lecture 30 */,City/* Lecture 37 */};
 
 /* Lecture 27 */
 class BackendRepository implements BackendRepositoryInterface  {
@@ -91,6 +91,44 @@ class BackendRepository implements BackendRepositoryInterface  {
     public function confirmReservation(Reservation $reservation)
     {
         return $reservation->update(['status' => true]);
+    }
+
+    /* Lecture 37 */
+    public function getCities()
+    {
+        return City::orderBy('name','asc')->get();
+    }
+
+
+    /* Lecture 37 */
+    public function getCity($id)
+    {
+        return City::find($id);
+    }
+
+
+    /* Lecture 37 */
+    public function createCity($request)
+    {
+        return City::create([
+            'name' => $request->input('name')
+        ]);
+    }
+
+
+    /* Lecture 37 */
+    public function updateCity($request, $id)
+    {
+        return City::where('id',$id)->update([
+            'name' => $request->input('name')
+        ]);
+    }
+
+
+    /* Lecture 37 */
+    public function deleteCity($id)
+    {
+        return City::where('id',$id)->delete();
     }
 
 
