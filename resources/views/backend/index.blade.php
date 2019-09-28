@@ -9,6 +9,7 @@
     <h3 class="red">{{ $object->name /* Lecture 29 */ }} object</h3>
 
 
+    {{-- separate calendar sinder each room needs unique calendar --}}
     @foreach( $object->rooms as $r=>$room ) <!-- Lecture 29 -->
 
     <!-- Lecture 30 -->
@@ -20,6 +21,7 @@
     var datesnotConfirmed{{ $o.$r }} = [];/* Lecture 32 */
 
     /* Lecture 32 */
+    // 2 arrays with reservation dates. Confirmed and not confirmed
     @foreach($room->reservations as $reservation)
 
         @if ($reservation->status)
@@ -52,7 +54,7 @@
     $(function () {
         $(".reservation_calendar" + {{ $o.$r }}/* Lecture 32 */).datepicker({
             onSelect: function (date/* Lecture 32 data->date */) {
-
+                // hide previous booking data
                 $('.hidden_' + {{ $o.$r }}).hide(); /* Lecture 32 $o.$r */
                 $('.loader_' + {{ $o.$r }}).show(); /* Lecture 32 $o.$r */
 
@@ -118,10 +120,10 @@
                                     <td><a class="reservation_data_person" target="_blank" href=""></a></td> <!-- Lecture 30 class -->
                                     <!-- Lecture 29 -->
                                     @if( Auth::user()->hasRole(['admin','owner']) )
-                                    <td><a href="#" class="btn btn-primary btn-xs reservation_data_confirm_reservation">Confirm</a></td> <!-- Lecture 30 css class -->
+                                    <td><a href="#" class="btn btn-primary btn-xs reservation_data_confirm_reservation keep_pos <?php /* Lecture 34 */?>">Confirm</a></td> <!-- Lecture 30 css class -->
                                     @endif
 
-                                    <td><a class="reservation_data_delete_reservation" href=""><span class="glyphicon glyphicon-remove"></span></a></td> <!-- Lecture 30 css class -->
+                                    <td><a class="reservation_data_delete_reservation keep_pos <?php /* Lecture 34 */?>" href=""><span class="glyphicon glyphicon-remove"></span></a></td> <!-- Lecture 30 css class -->
                                 </tr>
                             </tbody>
                         </table>

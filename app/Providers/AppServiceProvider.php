@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View; /* Lecture 16 */
+use Illuminate\Support\Facades\App; /* Lecture 34 */
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +20,23 @@ class AppServiceProvider extends ServiceProvider
         View::composer('frontend.*', function ($view) {
             $view->with('placeholder', asset('images/placeholder.jpg'));
             });
+
+        /* Lecture 34 */
+        if (App::environment('local'))
+        {
+
+           View::composer('*', function ($view) {
+            $view->with('novalidate', 'novalidate');
+            });
+
+        }
+        else
+        {
+            View::composer('*', function ($view) {
+            $view->with('novalidate', null);
+            });
+        }
+
     }
 
     /**

@@ -91,3 +91,8 @@ var App = {
     }
   }
 };
+/* Lecture 34 */
+
+$(document).on('click', '.dropdown', function (e) {
+  e.stopPropagation();
+});

@@ -67,7 +67,7 @@ class BackendController extends Controller
     /* Lecture 33 */
     public function deleteReservation($id)
     {
-        return 'to do';
+        return redirect()->back(); /* Lecture 34 */
     }
 
 }

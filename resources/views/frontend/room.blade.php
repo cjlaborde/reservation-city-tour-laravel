@@ -45,7 +45,7 @@
 
         <div class="row">
             <div class="col-md-6">
-                <form action="{{ route('makeReservation',['room_id'=>$room->id,'city_id'=>$room->object->city->id]) /* Lecture 26 */}}" method="POST">
+                <form {{ $novalidate /* Lecture 34 */ }} action="{{ route('makeReservation',['room_id'=>$room->id,'city_id'=>$room->object->city->id]) /* Lecture 26 */}}" method="POST">
                     <div class="form-group">
                         <label for="checkin">Check in</label>
                         <input required name="checkin" type="text" class="form-control datepicker" id="checkin" placeholder="">
@@ -54,7 +54,14 @@
                         <label for="checkout">Check out</label>
                         <input required name="checkout" type="text" class="form-control datepicker" id="checkout" placeholder="">
                     </div>
+
+		     <!-- Lecture 34 -->
+                    @if(Auth::guest())
+                    <p><a href="{{ route('login') }}">Log in to make a reservation</a></p>
+                    @else
                     <button type="submit" class="btn btn-primary">Book</button>
+                    @endif
+
                     <p class="text-danger">{{ Session::get('reservationMsg') /* Lecture 26 */}}</p>
                     {{ csrf_field() }} <!-- Lecture 26 -->
                 </form>
@@ -75,17 +82,17 @@
 <!-- Lecture 20 -->
 <script>
 
-    /* Lecture 21 */
-    function datesBetween(startDt, endDt) {
-        var between = [];
-        var currentDate = new Date(startDt);
-        var end = new Date(endDt);
-        // add dates to the array with the range for the reservations
-        while (currentDate <= end)
-        {
-            between.push( $.datepicker.formatDate('mm/dd/yy',new Date(currentDate)) );
-            currentDate.setDate(currentDate.getDate() + 1);
-        }
+/* Lecture 21 */
+function datesBetween(startDt, endDt) {
+    var between = [];
+    var currentDate = new Date(startDt);
+    var end = new Date(endDt);
+    // add dates to the array with the range for the reservations
+    while (currentDate <= end)
+    {
+        between.push( $.datepicker.formatDate('mm/dd/yy',new Date(currentDate)) );
+        currentDate.setDate(currentDate.getDate() + 1);
+    }
 
         return between;
 }
@@ -98,30 +105,30 @@ $.ajax({
     success: function(response){
 
 
-            var eventDates = {};
-            var dates = [/* Lecture 21 */];
+        var eventDates = {};
+        var dates = [/* Lecture 21 */];
 
-            /* Lecture 21 */
-            for(var i = 0; i <= response.reservations.length - 1; i++)
-            {
-                dates.push(datesBetween(new Date(response.reservations[i].day_in), new Date(response.reservations[i].day_out))); // array of arrays
-            }
+        /* Lecture 21 */
+        for(var i = 0; i <= response.reservations.length - 1; i++)
+        {
+            dates.push(datesBetween(new Date(response.reservations[i].day_in), new Date(response.reservations[i].day_out))); // array of arrays
+        }
 
 
-            /*  a = [1];
-                b = [2];
-                x = a.concat(b);
-                x = [1,2];
-                [ [1],[2],[3] ] => [1,2,3]  */
-            dates = [].concat.apply([], dates); /* Lecture 21 */   // flattened array
+        /*  a = [1];
+            b = [2];
+            x = a.concat(b);
+            x = [1,2];
+            [ [1],[2],[3] ] => [1,2,3]  */
+        dates = [].concat.apply([], dates); /* Lecture 21 */   // flattened array
 
             /* Lecture 21 */
             // will create an array of arrays with the date ranges between the function
             // save all the dates in the form required by the date picker
-            for (var i = 0; i <= dates.length - 1; i++)
-            {
-                eventDates[dates[i]] = dates[i];
-            }
+        for (var i = 0; i <= dates.length - 1; i++)
+        {
+            eventDates[dates[i]] = dates[i];
+        }
 
 
         $(function () {
@@ -142,17 +149,17 @@ $.ajax({
                         $('#checkout').val('');
                     }
 
-                    },
-                    beforeShowDay: function (date)
-                    {
-                        var tmp =  eventDates[$.datepicker.formatDate('mm/dd/yy', date)]; /* Lecture 21 */
-                        //console.log(date);
-                        if (tmp)
-                        // dates that are not clickable
-                            return [false, 'unavaiable_date'];
-                        else
-                            return [true, ''];
-                    }
+                },
+                beforeShowDay: function (date)
+                {
+                    var tmp =  eventDates[$.datepicker.formatDate('mm/dd/yy', date)]; /* Lecture 21 */
+                    //console.log(date);
+                    if (tmp)
+                         // dates that are not clickable
+                        return [false, 'unavaiable_date'];
+                    else
+                        return [true, ''];
+                }
 
 
             });
