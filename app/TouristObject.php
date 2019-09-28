@@ -18,11 +18,20 @@ class TouristObject extends Model
     {
         return $query->orderBy('name', 'asc');
     }
+
+
     /* Lecture 14 */
     public function city()
     {
         return $this->belongsTo('App\City');
     }
+
+    /* Lecture 35 */
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
+
     /* Lecture 14 */
     # users have many images
     public function photos()

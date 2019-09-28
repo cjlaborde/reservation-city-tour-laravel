@@ -110,14 +110,18 @@
                 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
 
+                    <br> <!-- Lecture 35 -->
 
-                    <!--<br>
-                    <div class="alert alert-dismissible show" role="alert">
+                    <!-- Lecture 35 -->
+                    @if(Session::has('message'))
+                    <br>
+                    <div class="alert {{ Session::get('alert-class', 'alert-info') }} alert-dismissible show" role="alert">
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
-
-                    </div>-->
+                        {{ Session::get('message') }}
+                    </div>
+                    @endif
 
                     @yield('content') <!-- Lecture 5 -->
                 </div>
