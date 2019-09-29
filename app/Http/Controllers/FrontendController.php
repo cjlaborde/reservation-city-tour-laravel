@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Enjoythetrip\Interfaces\FrontendRepositoryInterface; /* Lecture 12 Lecture 13 FrontendRepositoryInterface  */
 use App\Enjoythetrip\Gateways\FrontendGateway; /* Lecture 17 */
 use App\Events\OrderPlacedEvent; /* Lecture 54 */
+use Illuminate\Support\Facades\Cache; /* Lecture 55 */
 
 class FrontendController extends Controller
 {
@@ -99,6 +100,8 @@ class FrontendController extends Controller
     {
         $this->fR->like($likeable_id, $type, $request);
 
+        Cache::flush(); /* Lecture 55 */
+
         return redirect()->back();
     }
 
@@ -108,6 +111,8 @@ class FrontendController extends Controller
     {
         $this->fR->unlike($likeable_id, $type, $request);
 
+        Cache::flush(); /* Lecture 55 */
+
         return redirect()->back();
     }
 
@@ -116,6 +121,8 @@ class FrontendController extends Controller
     public function addComment($commentable_id, $type, Request $request)
     {
         $this->fG->addComment($commentable_id, $type, $request);
+
+        Cache::flush(); /* Lecture 55 */
 
         return redirect()->back();
     }

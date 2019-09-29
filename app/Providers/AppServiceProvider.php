@@ -50,11 +50,27 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        /* Lecture 13 */
-        $this->app->bind(\App\Enjoythetrip\Interfaces\FrontendRepositoryInterface::class,function()
+
+        /* Lecture 55 */
+        if (App::environment('local'))
         {
-            return new \App\Enjoythetrip\Repositories\FrontendRepository;
-        });
+
+            /* Lecture 13 */
+            $this->app->bind(\App\Enjoythetrip\Interfaces\FrontendRepositoryInterface::class,function()
+            {
+                return new \App\Enjoythetrip\Repositories\FrontendRepository;
+            });
+
+        }
+        else
+        {
+
+            $this->app->bind(\App\Enjoythetrip\Interfaces\FrontendRepositoryInterface::class,function()
+            {
+                return new \App\Enjoythetrip\Repositories\CachedFrontendRepository;
+            });
+
+        }
 
 
         /* Lecture 27 */

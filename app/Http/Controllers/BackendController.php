@@ -9,6 +9,7 @@ use App\Enjoythetrip\Gateways\BackendGateway; /* Lecture 27 */
 use Illuminate\Support\Facades\Auth; /* Lecture 39 */
 use Illuminate\Support\Facades\Storage; /* Lecture 40 */
 use App\Events\ReservationConfirmedEvent; /* Lecture 54 */
+use Illuminate\Support\Facades\Cache; /* Lecture 55 */
 
 
 class BackendController extends Controller
@@ -92,6 +93,8 @@ class BackendController extends Controller
 
         Storage::disk('public')->delete($path); /* Lecture 40 */
 
+        Cache::flush(); /* Lecture 55 */
+
         return redirect()->back();
     }
 
@@ -106,6 +109,8 @@ class BackendController extends Controller
             $this->authorize('checkOwner', $this->bR->getObject($id));
 
             $this->bG->saveObject($id, $request);
+
+            Cache::flush(); /* Lecture 55 */
 
             if($id)
             return redirect()->back();
@@ -135,6 +140,8 @@ class BackendController extends Controller
 
             $this->bG->saveRoom($id, $request);
 
+            Cache::flush(); /* Lecture 55 */
+
             if($id)
             return redirect()->back();
             else
@@ -156,6 +163,8 @@ class BackendController extends Controller
         $this->authorize('checkOwner', $room); /* Lecture 48 */
 
         $this->bR->deleteRoom($room); /* Lecture 48 */
+
+        Cache::flush(); /* Lecture 55 */
 
         return redirect()->back(); /* Lecture 48 */
     }
@@ -204,6 +213,8 @@ class BackendController extends Controller
 
         $this->bR->deleteArticle($article); /* Lecture 45 */
 
+        Cache::flush(); /* Lecture 55 */
+
         return redirect()->back(); /* Lecture 45 */
     }
 
@@ -222,6 +233,8 @@ class BackendController extends Controller
 
         $this->bG->saveArticle($object_id,$request); /* Lecture 45 */
 
+        Cache::flush(); /* Lecture 55 */
+
         return redirect()->back(); /* Lecture 45 */
     }
 
@@ -232,6 +245,8 @@ class BackendController extends Controller
         $this->authorize('checkOwner', $this->bR->getObject($id));
 
         $this->bR->deleteObject($id);
+
+        Cache::flush(); /* Lecture 55 */
 
         return redirect()->back();
 
