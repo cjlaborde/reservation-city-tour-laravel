@@ -2,7 +2,8 @@
 namespace App\Enjoythetrip\Repositories; /* Lecture 27 */
 
 use App\Enjoythetrip\Interfaces\BackendRepositoryInterface;  /* Lecture 27 */
-use App\{TouristObject/* Lecture 28 */,Reservation/* Lecture 30 */,City/* Lecture 37 */,User/* Lecture 39 */,Photo/* Lecture 40 */,Address/* Lecture 42 */,Article/* Lecture 45 */,Room/* Lecture 47 */};
+use Illuminate\Support\Facades\Auth; /* Lecture 53 */
+use App\{TouristObject/* Lecture 28 */,Reservation/* Lecture 30 */,City/* Lecture 37 */,User/* Lecture 39 */,Photo/* Lecture 40 */,Address/* Lecture 42 */,Article/* Lecture 45 */,Room/* Lecture 47 */,Notification/* Lecture 50 */};
 
 /* Lecture 27 */
 class BackendRepository implements BackendRepositoryInterface  {
@@ -329,6 +330,36 @@ class BackendRepository implements BackendRepositoryInterface  {
     public function deleteRoom(Room $room)
     {
         return $room->delete();
+    }
+
+
+    /* Lecture 50 */
+    public function setReadNotifications($request)
+    {
+       return Notification::where('id', $request->input('id'))
+                        ->update(['status' => 1]);
+    }
+
+
+    /* Lecture 52 */
+    public function getUserNotifications($id)
+    {
+        return Notification::where('user_id', $id)->where('shown', 0)->get();
+    }
+
+
+    /* Lecture 52 */
+    public function setShownNotifications($request)
+    {
+        return Notification::whereIn('id', $request->input('idsOfNotShownNotifications'))
+                        ->update(['shown' => 1]);
+    }
+
+
+    /* Lecture 53 */
+    public function getNotifications()
+    {
+        return Notification::where('user_id', Auth::user()->id )->where('status',0)->get(); // for mobile
     }
 
 }

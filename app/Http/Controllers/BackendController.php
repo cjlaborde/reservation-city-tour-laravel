@@ -236,4 +236,18 @@ class BackendController extends Controller
     }
 
 
+    /* Lecture 53 */
+    public function getNotifications()
+    {
+        return response()->json( $this->bR->getNotifications() ); // for mobile
+    }
+
+
+    /* Lecture 53 */
+    public function setReadNotifications(Request $request)
+    {
+        return  $this->bR->setReadNotifications($request); // for mobile
+    }
+
+
 }

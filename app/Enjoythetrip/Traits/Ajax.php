@@ -30,4 +30,30 @@ trait Ajax {
     }
 
 
+    /* Lecture 50 */
+    public function ajaxSetReadNotification(Request $request)
+    {
+        return  $this->bR->setReadNotifications($request);
+    }
+
+
+    /* Lecture 51 */
+    public function ajaxGetNotShownNotifications(Request $request)
+    {
+
+        $currentmodif = $this->bG->checkNotificationsStatus($request);
+
+        // executed if while loop ends
+        $response['notifications'] = $this->bR->getUserNotifications($request->user()->id); /* Lecture 52 */
+        $response['timestamp'] = $currentmodif;
+
+        return json_encode($response);
+    }
+
+    /* Lecture 52 */
+    public function ajaxSetShownNotifications(Request $request)
+    {
+        return $this->bR->setShownNotifications($request);
+    }
+
 }

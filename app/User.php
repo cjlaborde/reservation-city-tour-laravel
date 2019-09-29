@@ -56,6 +56,12 @@ class User extends Authenticatable
         return $this->hasMany('App\Comment');
     }
 
+    /* Lecture 49 */
+    public function unotifications()
+    {
+        return $this->hasMany('App\Notification');
+    }
+
     /* Lecture 27 */
     public function roles()
     {
