@@ -8,6 +8,7 @@ use App\Enjoythetrip\Interfaces\BackendRepositoryInterface; /* Lecture 27 */
 use App\Enjoythetrip\Gateways\BackendGateway; /* Lecture 27 */
 use Illuminate\Support\Facades\Auth; /* Lecture 39 */
 use Illuminate\Support\Facades\Storage; /* Lecture 40 */
+use App\Events\ReservationConfirmedEvent; /* Lecture 54 */
 
 
 class BackendController extends Controller
@@ -171,6 +172,7 @@ class BackendController extends Controller
 
         $this->flashMsg ('success', __('Reservation has been confirmed'));  /* Lecture 35 */
 
+        event( new ReservationConfirmedEvent($reservation) ); /* Lecture 54 */
 
         if (!\Request::ajax()) /* Lecture 35 */
         return redirect()->back(); /* Lecture 35 */

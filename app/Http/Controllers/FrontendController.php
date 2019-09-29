@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Enjoythetrip\Interfaces\FrontendRepositoryInterface; /* Lecture 12 Lecture 13 FrontendRepositoryInterface  */
 use App\Enjoythetrip\Gateways\FrontendGateway; /* Lecture 17 */
+use App\Events\OrderPlacedEvent; /* Lecture 54 */
 
 class FrontendController extends Controller
 {
@@ -139,6 +140,8 @@ class FrontendController extends Controller
         else
         {
             $reservation = $this->fG->makeReservation($room_id, $city_id, $request);
+
+            event( new OrderPlacedEvent($reservation) ); /* Lecture 54 */
 
             if (!$request->ajax())
             return redirect()->route('adminHome');
