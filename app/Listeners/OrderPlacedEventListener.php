@@ -10,7 +10,7 @@ namespace App\Listeners;
 use App\Events\OrderPlacedEvent;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use App\Notification; /* Lecture 54 */
+use App\Notification; /* Part 54 */
 
 class OrderPlacedEventListener
 {
@@ -32,7 +32,7 @@ class OrderPlacedEventListener
      */
     public function handle(OrderPlacedEvent $event)
     {
-        /* Lecture 54 */
+        /* Part 54 */
         Notification::create([
 
             'user_id'=>$id = $event->reservation->room->object->user_id,
@@ -47,10 +47,10 @@ class OrderPlacedEventListener
         ]);
 
 
-        $memcache = new \Memcached(); /* Lecture 54 */
+        $memcache = new \App\Enjoythetrip\Services\FakedMemcached(); /* Part 54 */
 
-        $memcache->addServer('localhost', 11211) or die("Could not connect"); /* Lecture 54 */
+        $memcache->addServer('localhost', 11211) or die("Could not connect"); /* Part 54 */
 
-        $memcache->set('userid_' . $id. '_notification_timestamp',time()); /* Lecture 54 */
+        $memcache->set('userid_' . $id. '_notification_timestamp',time()); /* Part 54 */
     }
 }

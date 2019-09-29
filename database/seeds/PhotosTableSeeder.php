@@ -11,10 +11,10 @@ class PhotosTableSeeder extends Seeder
      */
     public function run()
     {
-        /* Lecture 11 */
+        /* Part 11 */
         $faker = Faker\Factory::create();
 
-        /* Lecture 11 */
+        /* Part 11 */
         for ($i = 1; $i <= 100; $i++) {
 
             DB::table('photos')->insert([
@@ -24,7 +24,7 @@ class PhotosTableSeeder extends Seeder
             ]);
         }
 
-        /* Lecture 11 */
+        /* Part 11 */
         for ($i = 1; $i <= 200; $i++) {
 
             DB::table('photos')->insert([
@@ -34,7 +34,7 @@ class PhotosTableSeeder extends Seeder
             ]);
         }
 
-        /* Lecture 11 */
+        /* Part 11 */
         for ($i = 1; $i <= 10; $i++) {
 
             DB::table('photos')->insert([

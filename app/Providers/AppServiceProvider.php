@@ -3,8 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\View; /* Lecture 16 */
-use Illuminate\Support\Facades\App; /* Lecture 34 */
+use Illuminate\Support\Facades\View; /* Part 16 */
+use Illuminate\Support\Facades\App; /* Part 34 */
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -15,17 +15,17 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        /* Lecture 49 */
+        /* Part 49 */
         View::composer('backend.*', '\App\Enjoythetrip\ViewComposers\BackendComposer');
 
 
-        /* Lecture 16 */
+        /* Part 16 */
         // placeholder = path to the actual image
         View::composer('frontend.*', function ($view) {
             $view->with('placeholder', asset('images/placeholder.jpg'));
             });
 
-        /* Lecture 34 */
+        /* Part 34 */
         if (App::environment('local'))
         {
 
@@ -51,11 +51,11 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
 
-        /* Lecture 55 */
+        /* Part 55 */
         if (App::environment('local'))
         {
 
-            /* Lecture 13 */
+            /* Part 13 */
             $this->app->bind(\App\Enjoythetrip\Interfaces\FrontendRepositoryInterface::class,function()
             {
                 return new \App\Enjoythetrip\Repositories\FrontendRepository;
@@ -73,7 +73,7 @@ class AppServiceProvider extends ServiceProvider
         }
 
 
-        /* Lecture 27 */
+        /* Part 27 */
         $this->app->bind(\App\Enjoythetrip\Interfaces\BackendRepositoryInterface::class,function()
         {
             return new \App\Enjoythetrip\Repositories\BackendRepository;

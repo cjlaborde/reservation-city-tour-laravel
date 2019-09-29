@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\{User,Role/* Lecture 36 */};
+use App\{User,Role/* Part 36 */};
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -27,7 +27,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/admin'; /* Lecture 7 */
+    protected $redirectTo = '/admin'; /* Part 7 */
 
     /**
      * Create a new controller instance.
@@ -49,7 +49,7 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => 'required|string|max:255',
-            'surname' => 'required|string|max:255', /* Lecture 7 */
+            'surname' => 'required|string|max:255', /* Part 7 */
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
         ]);
@@ -63,7 +63,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        /* Lecture 36 */
+        /* Part 36 */
         $user =  User::create([
             'name' => $data['name'],
             'surname' => $data['surname'],
@@ -71,7 +71,7 @@ class RegisterController extends Controller
             'password' => bcrypt($data['password']),
         ]);
 
-        /* Lecture 36 */
+        /* Part 36 */
         if(!Role::where('name','owner')->exists())
         {
             Role::create(['name'=>'owner']);
@@ -79,12 +79,12 @@ class RegisterController extends Controller
             Role::create(['name'=>'admin']);
         }
 
-        /* Lecture 36 */
+        /* Part 36 */
         if($data['owner'] ?? 0) $user->roles()->attach( Role::where('name','owner')->first()->id );
         else
         $user->roles()->attach( Role::where('name','tourist')->first()->id );
 
 
-        return $user; /* Lecture 36 */
+        return $user; /* Part 36 */
     }
 }

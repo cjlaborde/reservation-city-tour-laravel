@@ -1,23 +1,23 @@
 <?php
 
-namespace App; /* Lecture 19 */
+namespace App; /* Part 19 */
 
-use Illuminate\Database\Eloquent\Model; /* Lecture 19 */
+use Illuminate\Database\Eloquent\Model; /* Part 19 */
 
-/* Lecture 19 */
+/* Part 19 */
 class Reservation extends Model
 {
-    public $timestamps = false; /* Lecture 26 */
-    protected $guarded = ['id']; /* Lecture 26 */
-    //protected $fillable = ['name']; /* Lecture 26 */
+    public $timestamps = false; /* Part 26 */
+    protected $guarded = ['id']; /* Part 26 */
+    //protected $fillable = ['name']; /* Part 26 */
 
-    /* Lecture 28 */
+    /* Part 28 */
     public function user()
     {
         return $this->belongsTo('App\User');
     }
 
-    /* Lecture 30 */
+    /* Part 30 */
     public function room()
     {
         return $this->belongsTo('App\Room');

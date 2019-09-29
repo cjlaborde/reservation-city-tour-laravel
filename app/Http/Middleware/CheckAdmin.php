@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Middleware; /* Lecture 37 */
+namespace App\Http\Middleware; /* Part 37 */
 
-use Closure; /* Lecture 37 */
-use Illuminate\Support\Facades\Auth; /* Lecture 37 */
+use Closure; /* Part 37 */
+use Illuminate\Support\Facades\Auth; /* Part 37 */
 
-/* Lecture 37 */
+/* Part 37 */
 class CheckAdmin
 {
     /**
@@ -17,7 +17,7 @@ class CheckAdmin
      */
     public function handle($request, Closure $next)
     {
-        /* Lecture 37 */
+        /* Part 37 */
         if( Auth::user()->hasRole(['admin']) )
             return $next($request);
         else

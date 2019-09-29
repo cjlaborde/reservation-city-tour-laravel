@@ -22,9 +22,9 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}"> <!-- Lecture 5 -->
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}"> <!-- Part 5 -->
 
-    <!-- Lecture 17 -->
+    <!-- Part 17 -->
     <script>
         var base_url = '{{ url('/') }}';
     </script>
@@ -41,16 +41,16 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="{{ route('home') /* Lecture 17 */ }}">Home</a>
+            <a class="navbar-brand" href="{{ route('home') /* Part 17 */ }}">Home</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-        @auth <!-- Lecture 7 -->
+        @auth <!-- Part 7 -->
             <ul class="nav navbar-nav">
                 <li><p class="navbar-text">Logged in as:</p></li>
-                <li><p class="navbar-text">{{ Auth::user()->name }}</p></li> <!-- Lecture 7 Auth -->
+                <li><p class="navbar-text">{{ Auth::user()->name }}</p></li> <!-- Part 7 Auth -->
                 <li><a href="{{ route('adminHome') }}">admin</a></li>
 
-                <!-- Lecture 7 -->
+                <!-- Part 7 -->
                 <li>
                     <a class="dropdown-item" href="{{ route('logout') }}"
                        onclick="event.preventDefault();
@@ -63,13 +63,13 @@
                 </li>
 
             </ul>
-        @endauth <!-- Lecture 7 -->
-        @guest <!-- Lecture 7 -->
+        @endauth <!-- Part 7 -->
+        @guest <!-- Part 7 -->
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="{{ route('login') }}">Sign in</a></li> <!-- Lecture 7 route -->
-                <li><a href="{{ route('register') }}">Sign up</a></li> <!-- Lecture 7 route -->
+                <li><a href="{{ route('login') }}">Sign in</a></li> <!-- Part 7 route -->
+                <li><a href="{{ route('register') }}">Sign up</a></li> <!-- Part 7 route -->
             </ul>
-        @endguest <!-- Lecture 7 -->
+        @endguest <!-- Part 7 -->
         </div><!--/.nav-collapse -->
     </div>
 </nav>
@@ -79,25 +79,25 @@
         <h1>Enjoy the trip!</h1>
         <p>A platform for tourists and owners of tourist facilities. Find the original place for the holidays!</p>
         <p>Place your home on the site and let yourself be found by many tourists!</p>
-        <form method="POST" <?php /* Lecture 18 */?> action="{{ route('roomSearch') }}" class="form-inline">
+        <form method="POST" <?php /* Part 18 */?> action="{{ route('roomSearch') }}" class="form-inline">
             <div class="form-group">
                 <label class="sr-only" for="city">City</label>
-                <input name="city" value="{{ old('city') /* Lecture 19 */ }}" type="text" class="form-control autocomplete" id="city" placeholder="City">
+                <input name="city" value="{{ old('city') /* Part 19 */ }}" type="text" class="form-control autocomplete" id="city" placeholder="City">
             </div>
             <div class="form-group">
                 <label class="sr-only" for="day_in">Check in</label>
-                <input name="check_in" value="{{ old('check_in') /* Lecture 19 */ }}" type="text" class="form-control datepicker" id="check_in" placeholder="Check in">
+                <input name="check_in" value="{{ old('check_in') /* Part 19 */ }}" type="text" class="form-control datepicker" id="check_in" placeholder="Check in">
             </div>
 
             <div class="form-group">
                 <label class="sr-only" for="day_out">Check out</label>
-                <input name="check_out" value="{{ old('check_out') /* Lecture 19 */ }}" type="text" class="form-control datepicker" id="check_out" placeholder="Check out">
+                <input name="check_out" value="{{ old('check_out') /* Part 19 */ }}" type="text" class="form-control datepicker" id="check_out" placeholder="Check out">
             </div>
             <div class="form-group">
                 <select name="room_size" class="form-control">
                     <option>Room size</option>
 
-                    <!-- Lecture 19 -->
+                    <!-- Part 19 -->
                     @for($i=1;$i<=5;$i++)
                         @if( old('room_size') == $i )
                             <option selected value="{{$i}}">{{$i}}</option>
@@ -110,29 +110,29 @@
             </div>
             <button type="submit" class="btn btn-warning">Search</button>
 
-            <!-- Lecture 6: deleted <input type="hidden" name="view" value="roomsearch"> -->
+            <!-- Part 6: deleted <input type="hidden" name="view" value="roomsearch"> -->
 
-        {{ csrf_field() }} <!-- Lecture 18 -->
+        {{ csrf_field() }} <!-- Part 18 -->
 
         </form>
 
     </div>
 </div>
 
-@yield('content') <!-- Lecture 5  -->
+@yield('content') <!-- Part 5  -->
 
 <div class="container-fluid">
 
     <div class="row mobile-apps">
 
         <div class="col-md-6 col-xs-12">
-            <!-- Lecture 5 img src tag -->
+            <!-- Part 5 img src tag -->
             <img src="{{ asset('images/mobile-app.png') }}" alt="" class="img-responsive center-block">
         </div>
 
         <div class="col-md-6 col-xs-12">
             <h1 class="text-center">Download mobile app.</h1>
-            <!-- Lecture 5 img src tags -->
+            <!-- Part 5 img src tags -->
             <a href="#"><img class="img-responsive center-block" src="{{ asset('images/google.png') }}" alt=""></a><br><br>
             <a href="#"><img class="img-responsive center-block" src="{{ asset('images/apple.png') }}" alt=""></a><br><br>
             <a href="#"><img class="img-responsive center-block" src="{{ asset('images/windows.png') }}" alt=""></a>
@@ -156,7 +156,7 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<script src="{{ asset('js/app.js') }}"></script> <!-- Lecture 5 -->
-@stack('scripts') <!-- Lecture 20 -->
+<script src="{{ asset('js/app.js') }}"></script> <!-- Part 5 -->
+@stack('scripts') <!-- Part 20 -->
 </body>
 </html>

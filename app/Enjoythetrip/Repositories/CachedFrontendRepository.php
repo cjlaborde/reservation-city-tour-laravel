@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Enjoythetrip\Repositories; /* Lecture 55 */
+namespace App\Enjoythetrip\Repositories; /* Part 55 */
 
 use App\Enjoythetrip\Interfaces\FrontendRepositoryInterface;
-use Illuminate\Support\Facades\Cache; /* Lecture 55 */
+use Illuminate\Support\Facades\Cache; /* Part 55 */
 
 
-/* Lecture 55 */
+/* Part 55 */
 class CachedFrontendRepository extends FrontendRepository implements FrontendRepositoryInterface {
 
 

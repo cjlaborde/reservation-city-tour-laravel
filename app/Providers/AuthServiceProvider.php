@@ -14,11 +14,11 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         'App\Model' => 'App\Policies\ModelPolicy',
-        'App\Reservation' => 'App\Policies\ReservationPolicy', /* Lecture 35 */
-        'App\Photo' => 'App\Policies\PhotoPolicy', /* Lecture 39 */
-        'App\TouristObject' => 'App\Policies\ObjectPolicy', /* Lecture 43 */
-        'App\Article' => 'App\Policies\ArticlePolicy', /* Lecture 45 */
-        'App\Room' => 'App\Policies\RoomPolicy' /* Lecture 47 */
+        'App\Reservation' => 'App\Policies\ReservationPolicy', /* Part 35 */
+        'App\Photo' => 'App\Policies\PhotoPolicy', /* Part 39 */
+        'App\TouristObject' => 'App\Policies\ObjectPolicy', /* Part 43 */
+        'App\Article' => 'App\Policies\ArticlePolicy', /* Part 45 */
+        'App\Room' => 'App\Policies\RoomPolicy' /* Part 47 */
     ];
 
     /**

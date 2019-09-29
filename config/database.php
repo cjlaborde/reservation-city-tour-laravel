@@ -121,7 +121,7 @@ return [
 
         'client' => 'predis',
 
-        'cluster' => false, /* Lecture 56 */    // only one server for redis
+        'cluster' => false, /* Part 56 */    // only one server for redis
 
         'default' => [
             'url' => env('REDIS_URL'),
@@ -131,7 +131,7 @@ return [
             'database' => 0,
         ],
 
-        /* Lecture 56 */
+        /* Part 56 */
         'session' => [
             'host' => env('REDIS_HOST', '127.0.0.1'),
             'password' => env('REDIS_PASSWORD', null),

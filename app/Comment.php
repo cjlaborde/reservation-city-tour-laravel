@@ -1,24 +1,24 @@
 <?php
 
-namespace App;/* Lecture 16 */
+namespace App;/* Part 16 */
 
-use Illuminate\Database\Eloquent\Model;/* Lecture 16 */
+use Illuminate\Database\Eloquent\Model;/* Part 16 */
 
-/* Lecture 16 */
+/* Part 16 */
 class Comment extends Model
 {
 
-    use Enjoythetrip\Presenters\CommentPresenter; /* Lecture 16 */
+    use Enjoythetrip\Presenters\CommentPresenter; /* Part 16 */
 
-    public $timestamps = false; /* Lecture 25 */
+    public $timestamps = false; /* Part 25 */
 
-    /* Lecture 16 */
+    /* Part 16 */
     public function commentable()
     {
         return $this->morphTo();
     }
 
-    /* Lecture 16 */
+    /* Part 16 */
     public function user()
     {
         return $this->belongsTo('App\User');

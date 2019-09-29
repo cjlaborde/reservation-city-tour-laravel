@@ -11,10 +11,10 @@ class RoleUserTableSeeder extends Seeder
      */
     public function run()
     {
-        /* Lecture 11 */
+        /* Part 11 */
         $faker = Faker\Factory::create();
 
-        /* Lecture 11 */
+        /* Part 11 */
         for ($i = 1; $i <= 10; $i++) {
 
             DB::table('role_user')->insert([

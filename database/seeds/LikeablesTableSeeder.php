@@ -11,10 +11,10 @@ class LikeablesTableSeeder extends Seeder
      */
     public function run()
     {
-        /* Lecture 11 */
+        /* Part 11 */
         $faker = Faker\Factory::create();
 
-        /* Lecture 11 */
+        /* Part 11 */
         for ($i = 1; $i <= 40; $i++) {
 
             DB::table('likeables')->insert([

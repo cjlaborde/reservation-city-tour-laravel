@@ -1,44 +1,44 @@
 <?php
 
-namespace App; /* Lecture 16 */
+namespace App; /* Part 16 */
 
-use Illuminate\Database\Eloquent\Model; /* Lecture 16 */
-use Illuminate\Support\Facades\Auth; /* Lecture 24 */
+use Illuminate\Database\Eloquent\Model; /* Part 16 */
+use Illuminate\Support\Facades\Auth; /* Part 24 */
 
-/* Lecture 16 */
+/* Part 16 */
 class Article extends Model
 {
 
-    use Enjoythetrip\Presenters\ArticlePresenter; /* Lecture 23 */
+    use Enjoythetrip\Presenters\ArticlePresenter; /* Part 23 */
 
-    protected $guarded = []; /* Lecture 45 */
-    public $timestamps = false; /* Lecture 45 */
+    protected $guarded = []; /* Part 45 */
+    public $timestamps = false; /* Part 45 */
 
-    /* Lecture 16 */
+    /* Part 16 */
     public function user()
     {
         return $this->belongsTo('App\User');
     }
 
-    /* Lecture 22 */
+    /* Part 22 */
     public function users()
     {
         return $this->morphToMany('App\User', 'likeable');
     }
 
-    /* Lecture 22 */
+    /* Part 22 */
     public function comments()
     {
         return $this->morphMany('App\Comment', 'commentable');
     }
 
-    /* Lecture 22 */
+    /* Part 22 */
     public function object()
     {
         return $this->belongsTo('App\TouristObject','object_id');
     }
 
-    /* Lecture 24 */
+    /* Part 24 */
     public function isLiked()
     {
         return $this->users()->where('user_id', Auth::user()->id)->exists();

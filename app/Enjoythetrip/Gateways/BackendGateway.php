@@ -1,14 +1,14 @@
 <?php
-namespace App\Enjoythetrip\Gateways; /* Lecture 27 */
+namespace App\Enjoythetrip\Gateways; /* Part 27 */
 
-use App\Enjoythetrip\Interfaces\BackendRepositoryInterface; /* Lecture 27 */
+use App\Enjoythetrip\Interfaces\BackendRepositoryInterface; /* Part 27 */
 
 
-/* Lecture 27 */
+/* Part 27 */
 class BackendGateway {
 
 
-    use \Illuminate\Foundation\Validation\ValidatesRequests; /* Lecture 37 */
+    use \Illuminate\Foundation\Validation\ValidatesRequests; /* Part 37 */
 
 
     public function __construct(BackendRepositoryInterface $bR )
@@ -36,7 +36,7 @@ class BackendGateway {
     }
 
 
-    /* Lecture 37 */
+    /* Part 37 */
     public function createCity($request)
     {
         $this->validate($request,[
@@ -47,7 +47,7 @@ class BackendGateway {
     }
 
 
-    /* Lecture 37 */
+    /* Part 37 */
     public function updateCity($request, $id)
     {
         $this->validate($request,[
@@ -58,7 +58,7 @@ class BackendGateway {
     }
 
 
-    /* Lecture 39 */
+    /* Part 39 */
     public function saveUser($request)
     {
         $this->validate($request,[
@@ -79,7 +79,7 @@ class BackendGateway {
     }
 
 
-    /* Lecture 42 */
+    /* Part 42 */
     public function saveObject($id, $request)
     {
 
@@ -105,9 +105,9 @@ class BackendGateway {
         if ($request->hasFile('objectPictures'))
         {
 
-            $this->validate($request, \App\Photo::imageRules($request,'objectPictures')); /* Lecture 43 */
+            $this->validate($request, \App\Photo::imageRules($request,'objectPictures')); /* Part 43 */
 
-            /* Lecture 43 */
+            /* Part 43 */
             foreach($request->file('objectPictures') as $picture)
             {
                 $path = $picture->store('objects', 'public');
@@ -124,7 +124,7 @@ class BackendGateway {
     }
 
 
-    /* Lecture 45 */
+    /* Part 45 */
     public function saveArticle($object_id,$request)
     {
         $this->validate($request,[
@@ -137,7 +137,7 @@ class BackendGateway {
     }
 
 
-    /* Lecture 47 */
+    /* Part 47 */
     public function saveRoom($id, $request)
     {
 
@@ -150,12 +150,12 @@ class BackendGateway {
 
         if($id)
         {
-            $room = $this->bR->updateRoom($id,$request); /* Lecture 48 */
+            $room = $this->bR->updateRoom($id,$request); /* Part 48 */
 
         }
         else
         {
-            $room = $this->bR->createNewRoom($request); /* Lecture 48 */
+            $room = $this->bR->createNewRoom($request); /* Part 48 */
         }
 
 
@@ -167,23 +167,23 @@ class BackendGateway {
             {
                 $path = $picture->store('rooms', 'public');
 
-                $this->bR->saveRoomPhotos($room, $path); /* Lecture 48 */
+                $this->bR->saveRoomPhotos($room, $path); /* Part 48 */
             }
 
         }
 
-            return $room; /* Lecture 48 */
+            return $room; /* Part 48 */
 
     }
 
 
-    /* Lecture 51 */
+    /* Part 51 */
     public function checkNotificationsStatus($request)
     {
 
         set_time_limit(0);
 
-        $memcache = new \Memcached();
+        $memcache = new \App\Enjoythetrip\Services\FakedMemcached();
 
         $memcache->addServer('localhost', 11211) or die("Could not connect");
 
@@ -199,7 +199,7 @@ class BackendGateway {
         while ($currentmodif <= $lastmodif)
         {
 
-            if ( (microtime(true) - $start) > 10) /* Lecture 52 >10 */
+            if ( (microtime(true) - $start) > 10) /* Part 52 >10 */
             {
                 return json_encode($response);
             }

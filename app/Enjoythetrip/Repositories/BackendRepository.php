@@ -1,15 +1,15 @@
 <?php
-namespace App\Enjoythetrip\Repositories; /* Lecture 27 */
+namespace App\Enjoythetrip\Repositories; /* Part 27 */
 
-use App\Enjoythetrip\Interfaces\BackendRepositoryInterface;  /* Lecture 27 */
-use Illuminate\Support\Facades\Auth; /* Lecture 53 */
-use App\{TouristObject/* Lecture 28 */,Reservation/* Lecture 30 */,City/* Lecture 37 */,User/* Lecture 39 */,Photo/* Lecture 40 */,Address/* Lecture 42 */,Article/* Lecture 45 */,Room/* Lecture 47 */,Notification/* Lecture 50 */};
+use App\Enjoythetrip\Interfaces\BackendRepositoryInterface;  /* Part 27 */
+use Illuminate\Support\Facades\Auth; /* Part 53 */
+use App\{TouristObject/* Part 28 */,Reservation/* Part 30 */,City/* Part 37 */,User/* Part 39 */,Photo/* Part 40 */,Address/* Part 42 */,Article/* Part 45 */,Room/* Part 47 */,Notification/* Part 50 */};
 
-/* Lecture 27 */
+/* Part 27 */
 class BackendRepository implements BackendRepositoryInterface  {
 
 
-    /* Lecture 28 */
+    /* Part 28 */
     public function getOwnerReservations($request)
     {
         return TouristObject::with([
@@ -27,7 +27,7 @@ class BackendRepository implements BackendRepositoryInterface  {
     }
 
 
-    /* Lecture 28 */
+    /* Part 28 */
     public function getTouristReservations($request)
     {
 
@@ -57,7 +57,7 @@ class BackendRepository implements BackendRepositoryInterface  {
                     ->get();
     }
 
-    /* Lecture 30 */
+    /* Part 30 */
     public function getReservationData($request)
     {
         return  Reservation::with('user', 'room')
@@ -68,41 +68,41 @@ class BackendRepository implements BackendRepositoryInterface  {
     }
 
 
-    /* Lecture 35 */
+    /* Part 35 */
     public function getReservation($id)
     {
         return Reservation::find($id);
     }
 
 
-    /* Lecture 35 */
+    /* Part 35 */
     public function deleteReservation(Reservation $reservation)
     {
         return $reservation->delete();
     }
 
 
-    /* Lecture 35 */
+    /* Part 35 */
     public function confirmReservation(Reservation $reservation)
     {
         return $reservation->update(['status' => true]);
     }
 
-    /* Lecture 37 */
+    /* Part 37 */
     public function getCities()
     {
         return City::orderBy('name','asc')->get();
     }
 
 
-    /* Lecture 37 */
+    /* Part 37 */
     public function getCity($id)
     {
         return City::find($id);
     }
 
 
-    /* Lecture 37 */
+    /* Part 37 */
     public function createCity($request)
     {
         return City::create([
@@ -111,7 +111,7 @@ class BackendRepository implements BackendRepositoryInterface  {
     }
 
 
-    /* Lecture 37 */
+    /* Part 37 */
     public function updateCity($request, $id)
     {
         return City::where('id',$id)->update([
@@ -120,14 +120,14 @@ class BackendRepository implements BackendRepositoryInterface  {
     }
 
 
-    /* Lecture 37 */
+    /* Part 37 */
     public function deleteCity($id)
     {
         return City::where('id',$id)->delete();
     }
 
 
-    /* Lecture 39 */
+    /* Part 39 */
     public function saveUser($request)
     {
         $user = User::find($request->user()->id);
@@ -140,20 +140,20 @@ class BackendRepository implements BackendRepositoryInterface  {
     }
 
 
-    /* Lecture 40 */
+    /* Part 40 */
     public function getPhoto($id)
     {
         return Photo::find($id);
     }
 
 
-    /* Lecture 40 */
+    /* Part 40 */
     public function updateUserPhoto(User $user,Photo $photo)
     {
         return $user->photos()->save($photo);
     }
 
-    /* Lecture 40 */
+    /* Part 40 */
     public function createUserPhoto($user,$path)
     {
         $photo = new Photo;
@@ -161,7 +161,7 @@ class BackendRepository implements BackendRepositoryInterface  {
         $user->photos()->save($photo);
     }
 
-    /* Lecture 40 */
+    /* Part 40 */
     public function deletePhoto(Photo $photo)
     {
         $path = $photo->storagepath;
@@ -170,14 +170,14 @@ class BackendRepository implements BackendRepositoryInterface  {
     }
 
 
-    /* Lecture 42 */
+    /* Part 42 */
     public function getObject($id)
     {
         return TouristObject::find($id);
     }
 
 
-    /* Lecture 42 */
+    /* Part 42 */
     public function updateObjectWithAddress($id, $request)
     {
 
@@ -200,7 +200,7 @@ class BackendRepository implements BackendRepositoryInterface  {
     }
 
 
-    /* Lecture 42 */
+    /* Part 42 */
     public function createNewObjectWithAddress($request)
     {
         $object = new TouristObject;
@@ -224,7 +224,7 @@ class BackendRepository implements BackendRepositoryInterface  {
     }
 
 
-    /* Lecture 43 */
+    /* Part 43 */
     public function saveObjectPhotos(TouristObject $object, string $path)
     {
 
@@ -235,7 +235,7 @@ class BackendRepository implements BackendRepositoryInterface  {
     }
 
 
-    /* Lecture 45 */
+    /* Part 45 */
     public function saveArticle($object_id,$request)
     {
             return Article::create([
@@ -247,42 +247,42 @@ class BackendRepository implements BackendRepositoryInterface  {
         ]);
     }
 
-    /* Lecture 45 */
+    /* Part 45 */
     public function getArticle($id)
     {
         return Article::find($id);
     }
 
 
-    /* Lecture 45 */
+    /* Part 45 */
     public function deleteArticle(Article $article)
     {
         return  $article->delete();
     }
 
 
-    /* Lecture 46 */
+    /* Part 46 */
     public function getMyObjects($request)
     {
         return TouristObject::where('user_id',$request->user()->id)->get();
     }
 
 
-    /* Lecture 46 */
+    /* Part 46 */
     public function deleteObject($id)
     {
         return TouristObject::where('id',$id)->delete();
     }
 
 
-    /* Lecture 47 */
+    /* Part 47 */
     public function getRoom($id)
     {
         return Room::find($id);
     }
 
 
-    /* Lecture 48 */
+    /* Part 48 */
     public function updateRoom($id,$request)
     {
         $room = Room::find($id);
@@ -297,7 +297,7 @@ class BackendRepository implements BackendRepositoryInterface  {
     }
 
 
-    /* Lecture 48 */
+    /* Part 48 */
     public function createNewRoom($request)
     {
         $room = new Room;
@@ -317,7 +317,7 @@ class BackendRepository implements BackendRepositoryInterface  {
     }
 
 
-    /* Lecture 48 */
+    /* Part 48 */
     public function saveRoomPhotos(Room $room, string $path)
     {
         $photo = new Photo;
@@ -326,14 +326,14 @@ class BackendRepository implements BackendRepositoryInterface  {
     }
 
 
-    /* Lecture 48 */
+    /* Part 48 */
     public function deleteRoom(Room $room)
     {
         return $room->delete();
     }
 
 
-    /* Lecture 50 */
+    /* Part 50 */
     public function setReadNotifications($request)
     {
        return Notification::where('id', $request->input('id'))
@@ -341,14 +341,14 @@ class BackendRepository implements BackendRepositoryInterface  {
     }
 
 
-    /* Lecture 52 */
+    /* Part 52 */
     public function getUserNotifications($id)
     {
         return Notification::where('user_id', $id)->where('shown', 0)->get();
     }
 
 
-    /* Lecture 52 */
+    /* Part 52 */
     public function setShownNotifications($request)
     {
         return Notification::whereIn('id', $request->input('idsOfNotShownNotifications'))
@@ -356,7 +356,7 @@ class BackendRepository implements BackendRepositoryInterface  {
     }
 
 
-    /* Lecture 53 */
+    /* Part 53 */
     public function getNotifications()
     {
         return Notification::where('user_id', Auth::user()->id )->where('status',0)->get(); // for mobile

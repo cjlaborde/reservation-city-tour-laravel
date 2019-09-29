@@ -6,7 +6,7 @@ $(function () {
 
 $(function () {
     $(".autocomplete").autocomplete({
-        source: base_url + "/searchCities", /* Lecture 17 */
+        source: base_url + "/searchCities", /* Part 17 */
         minLength: 2,
         select: function (event, ui) {
 
@@ -19,4 +19,4 @@ $(function () {
 
 
 
-//room.php /* Lecture 20 deleted code under this line */
+//room.php /* Part 20 deleted code under this line */

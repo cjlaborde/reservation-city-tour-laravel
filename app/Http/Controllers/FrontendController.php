@@ -3,62 +3,62 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Enjoythetrip\Interfaces\FrontendRepositoryInterface; /* Lecture 12 Lecture 13 FrontendRepositoryInterface  */
-use App\Enjoythetrip\Gateways\FrontendGateway; /* Lecture 17 */
-use App\Events\OrderPlacedEvent; /* Lecture 54 */
-use Illuminate\Support\Facades\Cache; /* Lecture 55 */
+use App\Enjoythetrip\Interfaces\FrontendRepositoryInterface; /* Part 12 Part 13 FrontendRepositoryInterface  */
+use App\Enjoythetrip\Gateways\FrontendGateway; /* Part 17 */
+use App\Events\OrderPlacedEvent; /* Part 54 */
+use Illuminate\Support\Facades\Cache; /* Part 55 */
 
 class FrontendController extends Controller
 {
-    /* Lecture 12 */
-    public function __construct(FrontendRepositoryInterface $frontendRepository, FrontendGateway $frontendGateway /* Lecture 17 */) /* Lecture 13 FrontendRepositoryInterface */
+    /* Part 12 */
+    public function __construct(FrontendRepositoryInterface $frontendRepository, FrontendGateway $frontendGateway /* Part 17 */) /* Part 13 FrontendRepositoryInterface */
     {
 
-        $this->middleware('auth')->only(['makeReservation','addComment','like','unlike']); /* Lecture 24 */
+        $this->middleware('auth')->only(['makeReservation','addComment','like','unlike']); /* Part 24 */
 
         $this->fR = $frontendRepository;
-        $this->fG = $frontendGateway; /* Lecture 17 */
+        $this->fG = $frontendGateway; /* Part 17 */
     }
 
 
-    /* Lecture 6 */
+    /* Part 6 */
     public function index()
     {
-        $objects = $this->fR->getObjectsForMainPage(); /* Lecture 12 */
-        //dd($objects);  /* Lecture 12 */
-        return view('frontend.index',['objects'=>$objects]); /* Lecture 12 second argument */
+        $objects = $this->fR->getObjectsForMainPage(); /* Part 12 */
+        //dd($objects);  /* Part 12 */
+        return view('frontend.index',['objects'=>$objects]); /* Part 12 second argument */
     }
 
-    /* Lecture 6 */
-    public function article($id/* Lecture 22 */)
+    /* Part 6 */
+    public function article($id/* Part 22 */)
     {
-        $article = $this->fR->getArticle($id); /* Lecture 22 */
-        return view('frontend.article',compact('article')/* Lecture 22 */);
+        $article = $this->fR->getArticle($id); /* Part 22 */
+        return view('frontend.article',compact('article')/* Part 22 */);
     }
 
-    /* Lecture 6 */
-    public function object($id) /* Lecture 15 $id */
+    /* Part 6 */
+    public function object($id) /* Part 15 $id */
     {
-        $object = $this->fR->getObject($id); /* Lecture 15 */
-        return view('frontend.object',['object'=>$object]); /* Lecture 16 second argument */
+        $object = $this->fR->getObject($id); /* Part 15 */
+        return view('frontend.object',['object'=>$object]); /* Part 16 second argument */
     }
 
-    /* Lecture 6 */
-    public function person($id/* Lecture 23 */)
+    /* Part 6 */
+    public function person($id/* Part 23 */)
     {
-        $user = $this->fR->getPerson($id); /* Lecture 23 */
-        return view('frontend.person', ['user'=>$user]/* Lecture 23 */);
+        $user = $this->fR->getPerson($id); /* Part 23 */
+        return view('frontend.person', ['user'=>$user]/* Part 23 */);
     }
 
-    /* Lecture 6 */
-    public function room($id /* Lecture 20 */)
+    /* Part 6 */
+    public function room($id /* Part 20 */)
     {
-        $room = $this->fR->getRoom($id); /* Lecture 20 */
-        return view('frontend.room',['room'=>$room]/* Lecture 20 */);
+        $room = $this->fR->getRoom($id); /* Part 20 */
+        return view('frontend.room',['room'=>$room]/* Part 20 */);
     }
 
 
-    /* Lecture 20 */
+    /* Part 20 */
     public function ajaxGetRoomReservations($id)
     {
 
@@ -69,15 +69,15 @@ class FrontendController extends Controller
         ]);
     }
 
-    /* Lecture 6 */
-    public function roomsearch(Request $request /* Lecture 18 */)
+    /* Part 6 */
+    public function roomsearch(Request $request /* Part 18 */)
     {
-        /* Lecture 18 */
+        /* Part 18 */
         if($city = $this->fG->getSearchResults($request))
         {
             return view('frontend.roomsearch',['city'=>$city]);
         }
-        else /* Lecture 18 */
+        else /* Part 18 */
         {
             if (!$request->ajax())
             return redirect('/')->with('norooms', __('No offers were found matching the criteria'));
@@ -86,7 +86,7 @@ class FrontendController extends Controller
     }
 
 
-    /* Lecture 17 */
+    /* Part 17 */
     public function searchCities(Request $request)
     {
 
@@ -95,40 +95,40 @@ class FrontendController extends Controller
         return response()->json($results);
     }
 
-    /* Lecture 24 */
+    /* Part 24 */
     public function like($likeable_id, $type, Request $request)
     {
         $this->fR->like($likeable_id, $type, $request);
 
-        Cache::flush(); /* Lecture 55 */
+        Cache::flush(); /* Part 55 */
 
         return redirect()->back();
     }
 
 
-    /* Lecture 24 */
+    /* Part 24 */
     public function unlike($likeable_id, $type, Request $request)
     {
         $this->fR->unlike($likeable_id, $type, $request);
 
-        Cache::flush(); /* Lecture 55 */
+        Cache::flush(); /* Part 55 */
 
         return redirect()->back();
     }
 
 
-    /* Lecture 25 */
+    /* Part 25 */
     public function addComment($commentable_id, $type, Request $request)
     {
         $this->fG->addComment($commentable_id, $type, $request);
 
-        Cache::flush(); /* Lecture 55 */
+        Cache::flush(); /* Part 55 */
 
         return redirect()->back();
     }
 
 
-    /* Lecture 26 */
+    /* Part 26 */
     public function makeReservation($room_id, $city_id, Request $request)
     {
 
@@ -148,7 +148,7 @@ class FrontendController extends Controller
         {
             $reservation = $this->fG->makeReservation($room_id, $city_id, $request);
 
-            event( new OrderPlacedEvent($reservation) ); /* Lecture 54 */
+            event( new OrderPlacedEvent($reservation) ); /* Part 54 */
 
             if (!$request->ajax())
             return redirect()->route('adminHome');

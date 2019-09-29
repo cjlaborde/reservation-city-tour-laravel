@@ -1,6 +1,6 @@
-@extends('layouts.backend') <!-- Lecture 5 -->
+@extends('layouts.backend') <!-- Part 5 -->
 
-@section('content') <!-- Lecture 5 -->
+@section('content') <!-- Part 5 -->
 <h2>Adding a new room to the object / editing</h2>
 <form method="POST" enctype="multipart/form-data" class="form-horizontal">
     <fieldset>
@@ -75,5 +75,5 @@
 
     </fieldset>
 </form>
-@endsection <!-- Lecture 5 -->
+@endsection <!-- Part 5 -->
 

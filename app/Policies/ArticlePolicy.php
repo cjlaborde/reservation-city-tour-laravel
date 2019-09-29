@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Policies; /* Lecture 45 */
+namespace App\Policies; /* Part 45 */
 
-use App\User; /* Lecture 45 */
-use Illuminate\Auth\Access\HandlesAuthorization; /* Lecture 45 */
+use App\User; /* Part 45 */
+use Illuminate\Auth\Access\HandlesAuthorization; /* Part 45 */
 
 
-/* Lecture 45 */
+/* Part 45 */
 class ArticlePolicy
 {
     use HandlesAuthorization;
@@ -21,7 +21,7 @@ class ArticlePolicy
         //
     }
 
-    /* Lecture 45 */
+    /* Part 45 */
     public function checkOwner(User $user, \App\Article $article)
     {
         return $user->id === $article->user_id;

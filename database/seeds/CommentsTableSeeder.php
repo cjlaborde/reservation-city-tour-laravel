@@ -11,10 +11,10 @@ class CommentsTableSeeder extends Seeder
      */
     public function run()
     {
-        /* Lecture 10 */
+        /* Part 10 */
         $faker = Faker\Factory::create();
 
-        /* Lecture 10 */
+        /* Part 10 */
         for ($i = 1; $i <= 50; $i++) {
 
             DB::table('comments')->insert([

@@ -16,13 +16,13 @@ class CreateArticlesTable extends Migration
         Schema::create('articles', function (Blueprint $table) {
             
             $table->bigIncrements('id');
-            $table->string('title'); /* Lecture 9 */
-            $table->text('content'); /* Lecture 9 */
-            $table->bigInteger('user_id')->unsigned(); /* Lecture 9 */
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade'); /* Lecture 9 */
-            $table->bigInteger('object_id')->unsigned(); /* Lecture 9 */
-            $table->foreign('object_id')->references('id')->on('objects')->onDelete('cascade'); /* Lecture 9 */
-            $table->dateTime('created_at'); /* Lecture 9 */
+            $table->string('title'); /* Part 9 */
+            $table->text('content'); /* Part 9 */
+            $table->bigInteger('user_id')->unsigned(); /* Part 9 */
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade'); /* Part 9 */
+            $table->bigInteger('object_id')->unsigned(); /* Part 9 */
+            $table->foreign('object_id')->references('id')->on('objects')->onDelete('cascade'); /* Part 9 */
+            $table->dateTime('created_at'); /* Part 9 */
         });
     }
 

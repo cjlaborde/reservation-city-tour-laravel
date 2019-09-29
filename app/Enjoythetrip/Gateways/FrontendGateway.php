@@ -1,22 +1,22 @@
 <?php
 
-namespace App\Enjoythetrip\Gateways; /* Lecture 17 */
+namespace App\Enjoythetrip\Gateways; /* Part 17 */
 
-use App\Enjoythetrip\Interfaces\FrontendRepositoryInterface; /* Lecture 17 */
+use App\Enjoythetrip\Interfaces\FrontendRepositoryInterface; /* Part 17 */
 
-/* Lecture 17 */
+/* Part 17 */
 class FrontendGateway {
 
-    use \Illuminate\Foundation\Validation\ValidatesRequests; /* Lecture 25 */
+    use \Illuminate\Foundation\Validation\ValidatesRequests; /* Part 25 */
 
-    /* Lecture 17 */
+    /* Part 17 */
     public function __construct(FrontendRepositoryInterface $fR )
     {
         $this->fR = $fR;
     }
 
 
-    /* Lecture 17 */
+    /* Part 17 */
     public function searchCities($request)
     {
         $term = $request->input('term');
@@ -34,22 +34,22 @@ class FrontendGateway {
     }
 
 
-    /* Lecture 18 */
+    /* Part 18 */
     public function getSearchResults($request)
     {
 
         if( $request->input('city') != null)
         {
 
-            $dayin = date('Y-m-d', strtotime($request->input('check_in'))); /* Lecture 19 */
-            $dayout = date('Y-m-d', strtotime($request->input('check_out'))); /* Lecture 19 */
+            $dayin = date('Y-m-d', strtotime($request->input('check_in'))); /* Part 19 */
+            $dayout = date('Y-m-d', strtotime($request->input('check_out'))); /* Part 19 */
 
             $result = $this->fR->getSearchResults($request->input('city'));
 
             if($result)
             {
 
-                /* Lecture 19 */
+                /* Part 19 */
                 # check if room size number same as in database
                 foreach ($result->rooms as $k=>$room)
                 {
@@ -90,7 +90,7 @@ class FrontendGateway {
 
                 $request->flash(); // inputs for session for one request
 
-                /* Lecture 19 */
+                /* Part 19 */
                 if(count($result->rooms)> 0)
                 return $result;  // filtered result
                 else return false;
@@ -104,7 +104,7 @@ class FrontendGateway {
     }
 
 
-    /* Lecture 25 */
+    /* Part 25 */
     public function addComment($commentable_id, $type, $request)
     {
         $this->validate($request,[
@@ -115,7 +115,7 @@ class FrontendGateway {
     }
 
 
-    /* Lecture 26 */
+    /* Part 26 */
     public function checkAvaiableReservations($room_id, $request)
     {
 
@@ -151,7 +151,7 @@ class FrontendGateway {
     }
 
 
-    /* Lecture 26 */
+    /* Part 26 */
     public function makeReservation($room_id, $city_id, $request)
     {
         $this->validate($request,[

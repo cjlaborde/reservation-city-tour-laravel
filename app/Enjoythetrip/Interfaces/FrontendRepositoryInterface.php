@@ -5,16 +5,16 @@
 |--------------------------------------------------------------------------
 */
 
-namespace App\Enjoythetrip\Interfaces; /* Lecture 13 */
+namespace App\Enjoythetrip\Interfaces; /* Part 13 */
 
 
-/* Lecture 13 */
+/* Part 13 */
 interface FrontendRepositoryInterface   {
 
-    /* Lecture 13 */
+    /* Part 13 */
     public function getObjectsForMainPage();
 
-    /* Lecture 15 */
+    /* Part 15 */
     public function getObject($id);
 }
 

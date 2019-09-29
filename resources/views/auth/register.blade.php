@@ -8,7 +8,7 @@
                     <div class="card-header">Register</div>
 
                     <div class="card-body">
-                        <form {{ $novalidate /* Lecture 36 */ }} method="POST" action="{{ route('register') }}">
+                        <form {{ $novalidate /* Part 36 */ }} method="POST" action="{{ route('register') }}">
                             {{ csrf_field() }}
 
                             <div class="form-group row">
@@ -25,7 +25,7 @@
                                 </div>
                             </div>
 
-                            <!-- Lecture 7 -->
+                            <!-- Part 7 -->
                             <div class="form-group row">
                                 <label for="surname" class="col-md-4 col-form-label text-md-right">Surname</label>
 
@@ -77,7 +77,7 @@
                                 </div>
                             </div>
 
-                            <!-- Lecture 36 -->
+                            <!-- Part 36 -->
                             <div class="form-group">
                                 <div class="col-md-6 offset-4">
                                     <div class="checkbox">

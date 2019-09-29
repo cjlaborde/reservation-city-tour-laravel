@@ -5,7 +5,7 @@
 |--------------------------------------------------------------------------
 */
 
-/* Lecture 6 */
+/* Part 6 */
 return [
 
 
@@ -18,8 +18,8 @@ return [
     'saveobject' => 'saveobject',
     'profile' => 'profile',
     'saveroom' => 'saveroom',
-    'deleteobject' => 'deleteobject', /* Lecture 46 */
-    'deleteroom' => 'deleteroom', /* Lecture 47 */
+    'deleteobject' => 'deleteobject', /* Part 46 */
+    'deleteroom' => 'deleteroom', /* Part 47 */
 
 
 ];

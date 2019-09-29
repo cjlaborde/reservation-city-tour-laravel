@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Policies; /* Lecture 43 */
+namespace App\Policies; /* Part 43 */
 
-use App\{User,TouristObject}; /* Lecture 43 */
-use Illuminate\Auth\Access\HandlesAuthorization; /* Lecture 43 */
+use App\{User,TouristObject}; /* Part 43 */
+use Illuminate\Auth\Access\HandlesAuthorization; /* Part 43 */
 
 
- /* Lecture 43 */
+ /* Part 43 */
 class ObjectPolicy
 {
     use HandlesAuthorization;

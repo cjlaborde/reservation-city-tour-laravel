@@ -1,26 +1,26 @@
-@extends('layouts.backend') <!-- Lecture 5 -->
+@extends('layouts.backend') <!-- Part 5 -->
 
-@section('content') <!-- Lecture 5 -->
+@section('content') <!-- Part 5 -->
 <h2 class="sub-header">Booking calendar</h2>
 
-@foreach( $objects as $o=>$object ) <!-- Lecture 29 -->
+@foreach( $objects as $o=>$object ) <!-- Part 29 -->
 
-@php ( $o++ ) <!-- Lecture 29 -->
-    <h3 class="red">{{ $object->name /* Lecture 29 */ }} object</h3>
+@php ( $o++ ) <!-- Part 29 -->
+    <h3 class="red">{{ $object->name /* Part 29 */ }} object</h3>
 
 
     {{-- separate calendar sinder each room needs unique calendar --}}
-    @foreach( $object->rooms as $r=>$room ) <!-- Lecture 29 -->
+    @foreach( $object->rooms as $r=>$room ) <!-- Part 29 -->
 
-    <!-- Lecture 30 -->
+    <!-- Part 30 -->
     @push('scripts')
     <script>
 
-    var eventDates{{ $o.$r }} = {}; /* Lecture 32 $o.$r */
-    var datesConfirmed{{ $o.$r }} = []; /* Lecture 32 */
-    var datesnotConfirmed{{ $o.$r }} = [];/* Lecture 32 */
+    var eventDates{{ $o.$r }} = {}; /* Part 32 $o.$r */
+    var datesConfirmed{{ $o.$r }} = []; /* Part 32 */
+    var datesnotConfirmed{{ $o.$r }} = [];/* Part 32 */
 
-    /* Lecture 32 */
+    /* Part 32 */
     // 2 arrays with reservation dates. Confirmed and not confirmed
     @foreach($room->reservations as $reservation)
 
@@ -32,38 +32,38 @@
 
     @endforeach
 
-    datesConfirmed{{$o.$r}} = [].concat.apply([], datesConfirmed{{$o.$r}}); /* Lecture 32 */
-    datesnotConfirmed{{$o.$r}} = [].concat.apply([], datesnotConfirmed{{$o.$r}}); /* Lecture 32 */
+    datesConfirmed{{$o.$r}} = [].concat.apply([], datesConfirmed{{$o.$r}}); /* Part 32 */
+    datesnotConfirmed{{$o.$r}} = [].concat.apply([], datesnotConfirmed{{$o.$r}}); /* Part 32 */
 
 
-    for (var i = 0; i < datesConfirmed{{ $o.$r }}.length; i++) /* Lecture 32 $o.$r */
+    for (var i = 0; i < datesConfirmed{{ $o.$r }}.length; i++) /* Part 32 $o.$r */
     {
-        eventDates{{ $o.$r }}[ datesConfirmed{{ $o.$r }}[i] ] = 'confirmed'; /* Lecture 32 $o.$r */
+        eventDates{{ $o.$r }}[ datesConfirmed{{ $o.$r }}[i] ] = 'confirmed'; /* Part 32 $o.$r */
     }
 
-    var tmp{{ $o.$r }} = {}; /* Lecture 32 $o.$r */
-    for (var i = 0; i < datesnotConfirmed{{ $o.$r }}.length; i++) /* Lecture 32 $o.$r */
+    var tmp{{ $o.$r }} = {}; /* Part 32 $o.$r */
+    for (var i = 0; i < datesnotConfirmed{{ $o.$r }}.length; i++) /* Part 32 $o.$r */
     {
-        tmp{{ $o.$r }}[ datesnotConfirmed{{ $o.$r }}[i] ] = 'notconfirmed'; /* Lecture 32 $o.$r */
+        tmp{{ $o.$r }}[ datesnotConfirmed{{ $o.$r }}[i] ] = 'notconfirmed'; /* Part 32 $o.$r */
     }
 
 
-    Object.assign(eventDates{{ $o.$r }}, tmp{{ $o.$r }});  /* Lecture 32 $o.$r */
+    Object.assign(eventDates{{ $o.$r }}, tmp{{ $o.$r }});  /* Part 32 $o.$r */
 
 
     $(function () {
-        $(".reservation_calendar" + {{ $o.$r }}/* Lecture 32 */).datepicker({
-            onSelect: function (date/* Lecture 32 data->date */) {
+        $(".reservation_calendar" + {{ $o.$r }}/* Part 32 */).datepicker({
+            onSelect: function (date/* Part 32 data->date */) {
                 // hide previous booking data
-                $('.hidden_' + {{ $o.$r }}).hide(); /* Lecture 32 $o.$r */
-                $('.loader_' + {{ $o.$r }}).show(); /* Lecture 32 $o.$r */
+                $('.hidden_' + {{ $o.$r }}).hide(); /* Part 32 $o.$r */
+                $('.loader_' + {{ $o.$r }}).show(); /* Part 32 $o.$r */
 
-                App.GetReservationData({{ $room->id }}, {{ $o.$r }}, date ); /* Lecture 32 */
+                App.GetReservationData({{ $room->id }}, {{ $o.$r }}, date ); /* Part 32 */
 
             },
             beforeShowDay: function (date)
             {
-                var tmp = eventDates{{ $o.$r }}[ $.datepicker.formatDate('mm/dd/yy', date)]; /* Lecture 32 $o.$r */
+                var tmp = eventDates{{ $o.$r }}[ $.datepicker.formatDate('mm/dd/yy', date)]; /* Part 32 $o.$r */
     //            console.log(tmp);
                 if (tmp)
                 {
@@ -84,15 +84,15 @@
     </script>
     @endpush
 
-        <h4 class="blue"> Room {{ $room->room_number /* Lecture 29 */ }}</h4>
+        <h4 class="blue"> Room {{ $room->room_number /* Part 29 */ }}</h4>
 
         <div class="row top-buffer">
             <div class="col-md-3">
-                <div class="reservation_calendar{{ $o.$r/* Lecture 29 */}}"></div>
+                <div class="reservation_calendar{{ $o.$r/* Part 29 */}}"></div>
             </div>
             <div class="col-md-9">
-                <div class="center-block loader loader_{{ $o.$r /* Lecture 29 */}}" style="display: none;"></div>
-                <div class="hidden_{{ $o.$r /* Lecture 29 */}}" style="display: none;">
+                <div class="center-block loader loader_{{ $o.$r /* Part 29 */}}" style="display: none;"></div>
+                <div class="hidden_{{ $o.$r /* Part 29 */}}" style="display: none;">
 
 
                     <div class="table-responsive">
@@ -104,7 +104,7 @@
                                     <th>Check out</th>
                                     <th>Guest</th>
 
-                                    <!-- Lecture 29 -->
+                                    <!-- Part 29 -->
                                     @if( Auth::user()->hasRole(['admin','owner']) )
                                     <th>Confirmation</th>
                                     @endif
@@ -114,16 +114,16 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td class="reservation_data_room_number"></td> <!-- Lecture 30 class -->
-                                    <td class="reservation_data_day_in"></td> <!-- Lecture 30 class -->
-                                    <td class="reservation_data_day_out"></td> <!-- Lecture 30 class -->
-                                    <td><a class="reservation_data_person" target="_blank" href=""></a></td> <!-- Lecture 30 class -->
-                                    <!-- Lecture 29 -->
+                                    <td class="reservation_data_room_number"></td> <!-- Part 30 class -->
+                                    <td class="reservation_data_day_in"></td> <!-- Part 30 class -->
+                                    <td class="reservation_data_day_out"></td> <!-- Part 30 class -->
+                                    <td><a class="reservation_data_person" target="_blank" href=""></a></td> <!-- Part 30 class -->
+                                    <!-- Part 29 -->
                                     @if( Auth::user()->hasRole(['admin','owner']) )
-                                    <td><a href="#" class="btn btn-primary btn-xs reservation_data_confirm_reservation keep_pos <?php /* Lecture 34 */?>">Confirm</a></td> <!-- Lecture 30 css class -->
+                                    <td><a href="#" class="btn btn-primary btn-xs reservation_data_confirm_reservation keep_pos <?php /* Part 34 */?>">Confirm</a></td> <!-- Part 30 css class -->
                                     @endif
 
-                                    <td><a class="reservation_data_delete_reservation keep_pos <?php /* Lecture 34 */?>" href=""><span class="glyphicon glyphicon-remove"></span></a></td> <!-- Lecture 30 css class -->
+                                    <td><a class="reservation_data_delete_reservation keep_pos <?php /* Part 34 */?>" href=""><span class="glyphicon glyphicon-remove"></span></a></td> <!-- Part 30 css class -->
                                 </tr>
                             </tbody>
                         </table>
@@ -135,8 +135,8 @@
 
         <hr>
 
-    @endforeach <!-- Lecture 29 -->
+    @endforeach <!-- Part 29 -->
 
-@endforeach <!-- Lecture 29 -->
-@endsection <!-- Lecture 5 -->
+@endforeach <!-- Part 29 -->
+@endsection <!-- Part 5 -->
 

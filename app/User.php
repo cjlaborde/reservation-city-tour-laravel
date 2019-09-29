@@ -10,7 +10,7 @@ class User extends Authenticatable
     use Notifiable;
     use Enjoythetrip\Presenters\UserPresenter;
 
-    public static $roles = []; /* Lecture 27 */
+    public static $roles = []; /* Part 27 */
 
     /**
      * The attributes that are mass assignable.
@@ -18,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'surname'   /* Lecture 7 surname */
+        'name', 'email', 'password', 'surname'   /* Part 7 surname */
     ];
 
     /**
@@ -31,45 +31,45 @@ class User extends Authenticatable
     ];
 
 
-    /* Lecture 16 */
+    /* Part 16 */
     public function objects()
     {
         return $this->morphedByMany('App\TouristObject', 'likeable');
     }
 
 
-    /* Lecture 22 */
+    /* Part 22 */
     public function larticles()
     {
         return $this->morphedByMany('App\Article', 'likeable');
     }
 
-    /* Lecture 16 */
+    /* Part 16 */
     public function photos()
     {
         return $this->morphMany('App\Photo', 'photoable');
     }
 
-    /* Lecture 23 */
+    /* Part 23 */
     public function comments()
     {
         return $this->hasMany('App\Comment');
     }
 
-    /* Lecture 49 */
+    /* Part 49 */
     public function unotifications()
     {
         return $this->hasMany('App\Notification');
     }
 
-    /* Lecture 27 */
+    /* Part 27 */
     public function roles()
     {
         return $this->belongsToMany('App\Role');
     }
 
 
-    /* Lecture 27 */
+    /* Part 27 */
     public function hasRole(array $roles)
     {
 

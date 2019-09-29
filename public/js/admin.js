@@ -1,4 +1,4 @@
-/* Lecture 32 */
+/* Part 32 */
 function datesBetween(startDt, endDt) {
   var between = [];
   var currentDate = new Date(startDt);
@@ -11,7 +11,7 @@ function datesBetween(startDt, endDt) {
 
   return between;
 }
-/* Lecture 30 */
+/* Part 30 */
 
 
 var Ajax = {
@@ -34,7 +34,7 @@ var Ajax = {
     });
   },
 
-  /* Lecture 50 */
+  /* Part 50 */
   set: function set() {
     var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
     var url = arguments.length > 1 ? arguments[1] : undefined;
@@ -53,54 +53,54 @@ var Ajax = {
     });
   }
 };
-/* Lecture 30 */
+/* Part 30 */
 
 var App = {
   timestamp: null,
 
-  /* Lecture 51 */
+  /* Part 51 */
   idsOfNotShownNotifications: [],
 
-  /* Lecture 52 */
+  /* Part 52 */
   GetReservationData: function GetReservationData(id, calendar_id
-  /* Lecture 32 */
+  /* Part 32 */
   , date) {
     App.calendar_id = calendar_id;
-    /* Lecture 32 */
+    /* Part 32 */
 
     Ajax.get('ajaxGetReservationData?fromWebApp=1', 'AfterGetReservationData', {
       room_id: id,
       date: date
     }, 'BeforeGetReservationData');
-    /* Lecture 31 ?fromWebApp=1 */
+    /* Part 31 ?fromWebApp=1 */
   },
   BeforeGetReservationData: function BeforeGetReservationData() {
     $('.loader_' + App.calendar_id).hide();
-    /* Lecture 32 */
+    /* Part 32 */
 
     $('.hidden_' + App.calendar_id).show();
-    /* Lecture 32 */
+    /* Part 32 */
   },
   AfterGetReservationData: function AfterGetReservationData(response) {
     $('.hidden_' + App.calendar_id + " .reservation_data_room_number").html(response.room_number);
-    /* Lecture 32 */
+    /* Part 32 */
 
     $('.hidden_' + App.calendar_id + " .reservation_data_day_in").html(response.day_in);
-    /* Lecture 33 */
+    /* Part 33 */
 
     $('.hidden_' + App.calendar_id + " .reservation_data_day_out").html(response.day_out);
-    /* Lecture 33 */
+    /* Part 33 */
 
     $('.hidden_' + App.calendar_id + " .reservation_data_person").html(response.FullName);
-    /* Lecture 33 */
+    /* Part 33 */
 
     $('.hidden_' + App.calendar_id + " .reservation_data_person").attr('href', response.userLink);
-    /* Lecture 33 */
+    /* Part 33 */
 
     $('.hidden_' + App.calendar_id + " .reservation_data_delete_reservation").attr('href', response.deleteResLink);
-    /* Lecture 33 */
+    /* Part 33 */
 
-    /* Lecture 33 */
+    /* Part 33 */
 
     if (response.status) {
       $('.hidden_' + App.calendar_id + " .reservation_data_confirm_reservation").removeAttr('href');
@@ -110,40 +110,40 @@ var App = {
     }
   },
 
-  /* Lecture 50 */
+  /* Part 50 */
   SetReadNotification: function SetReadNotification(id) {
     Ajax.set({
       id: id
     }, 'ajaxSetReadNotification?fromWebApp=1');
   },
 
-  /* Lecture 50 */
+  /* Part 50 */
   GetNotShownNotifications: function GetNotShownNotifications() {
-    /* Lecture 51 */
+    /* Part 51 */
     Ajax.get("ajaxGetNotShownNotifications?fromWebApp=1&timestamp=" + App.timestamp, 'AfterGetNotShownNotifications');
   },
 
-  /* Lecture 51 */
+  /* Part 51 */
   AfterGetNotShownNotifications: function AfterGetNotShownNotifications(response) {
     var json = JSON.parse(response);
-    /* Lecture 52 */
+    /* Part 52 */
 
     App.timestamp = json['timestamp'];
-    /* Lecture 52 */
+    /* Part 52 */
 
     setTimeout(App.GetNotShownNotifications(), 100);
-    /* Lecture 52 */
+    /* Part 52 */
 
-    /* Lecture 52 */
+    /* Part 52 */
 
     if (jQuery.isEmptyObject(json['notifications'])) return;
     $('#app-notifications-count').show();
-    /* Lecture 52 */
+    /* Part 52 */
 
     $('#app-notifications-count').removeClass('hidden');
-    /* Lecture 52 */
+    /* Part 52 */
 
-    /* Lecture 52 */
+    /* Part 52 */
 
     for (var i = 0; i <= json['notifications'].length - 1; i++) {
       App.idsOfNotShownNotifications.push(json['notifications'][i].id);
@@ -152,22 +152,22 @@ var App = {
     }
 
     App.SetShownNotifications(App.idsOfNotShownNotifications);
-    /* Lecture 52 */
+    /* Part 52 */
   },
 
-  /* Lecture 52 */
+  /* Part 52 */
   SetShownNotifications: function SetShownNotifications(ids) {
     Ajax.set({
       idsOfNotShownNotifications: ids
     }, 'ajaxSetShownNotifications?fromWebApp=1');
   }
 };
-/* Lecture 34 */
+/* Part 34 */
 
 $(document).on('click', '.dropdown', function (e) {
   e.stopPropagation();
 });
-/* Lecture 50 */
+/* Part 50 */
 
 $(document).on("click", ".unread_notification", function (event) {
   event.preventDefault();
@@ -183,7 +183,7 @@ $(document).on("click", ".unread_notification", function (event) {
   $(this).children().removeAttr('href');
   App.SetReadNotification(idOfNotification);
 });
-/* Lecture 50 */
+/* Part 50 */
 
 $(function () {
   App.GetNotShownNotifications();

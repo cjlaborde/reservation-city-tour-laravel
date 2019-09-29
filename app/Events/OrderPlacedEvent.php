@@ -9,7 +9,7 @@ use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
-use App\Reservation; /* Lecture 54 */
+use App\Reservation; /* Part 54 */
 
 class OrderPlacedEvent
 {
@@ -20,9 +20,9 @@ class OrderPlacedEvent
      *
      * @return void
      */
-    public function __construct( Reservation $reservation /* Lecture 54 */ )
+    public function __construct( Reservation $reservation /* Part 54 */ )
     {
-        $this->reservation = $reservation; /* Lecture 54 */
+        $this->reservation = $reservation; /* Part 54 */
     }
 
     /**

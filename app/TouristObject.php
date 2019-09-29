@@ -1,77 +1,77 @@
 <?php
 
-namespace App; /* Lecture 12 */
+namespace App; /* Part 12 */
 
-use Illuminate\Database\Eloquent\Model; /* Lecture 12 */
-use Illuminate\Support\Facades\Auth; /* Lecture 24 */
+use Illuminate\Database\Eloquent\Model; /* Part 12 */
+use Illuminate\Support\Facades\Auth; /* Part 24 */
 
-/* Lecture 12 */
+/* Part 12 */
 class TouristObject extends Model
 {
 
     protected $table = 'objects';
-    public $timestamps = false; /* Lecture 44 */
+    public $timestamps = false; /* Part 44 */
 
-    use Enjoythetrip\Presenters\ObjectPresenter; /* Lecture 23 */
+    use Enjoythetrip\Presenters\ObjectPresenter; /* Part 23 */
 
-    /* Lecture 15 */
+    /* Part 15 */
     public function scopeOrdered($query)
     {
         return $query->orderBy('name', 'asc');
     }
 
 
-    /* Lecture 14 */
+    /* Part 14 */
     public function city()
     {
         return $this->belongsTo('App\City');
     }
 
-    /* Lecture 35 */
+    /* Part 35 */
     public function user()
     {
         return $this->belongsTo('App\User');
     }
 
-    /* Lecture 14 */
+    /* Part 14 */
     # users have many images
     public function photos()
     {
         return $this->morphMany('App\Photo', 'photoable');
     }
 
-    /* Lecture 16 */
+    /* Part 16 */
     // Many uses can like an TouristObject hence many to many morphToMany
     public function users()
     {
         return $this->morphToMany('App\User', 'likeable');
     }
 
-    /* Lecture 16 */
+    /* Part 16 */
     public function address()
     {
         return $this->hasOne('App\Address','object_id');
     }
 
-    /* Lecture 16 */
+    /* Part 16 */
     public function rooms()
     {
         return $this->hasMany('App\Room','object_id');
     }
 
-    /* Lecture 16 */
+    /* Part 16 */
     public function comments()
     {
         return $this->morphMany('App\Comment', 'commentable');
     }
 
-    /* Lecture 16 */
+    /* Part 16 */
     public function articles()
     {
         return $this->hasMany('App\Article','object_id');
     }
 
-    /* Lecture 24 */
+    /* Part 24 */
     public function isLiked()
     {
         return $this->users()->where('user_id', Auth::user()->id)->exists();

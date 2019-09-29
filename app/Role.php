@@ -1,14 +1,14 @@
 <?php
 
-namespace App; /* Lecture 27 */
+namespace App; /* Part 27 */
 
-use Illuminate\Database\Eloquent\Model; /* Lecture 27 */
+use Illuminate\Database\Eloquent\Model; /* Part 27 */
 
 class Role extends Model
 {
 
-    public $guarded = []; /* Lecture 36 */
-    public $timestamps = false; /* Lecture 36 */
+    public $guarded = []; /* Part 36 */
+    public $timestamps = false; /* Part 36 */
 
 
     public function users()

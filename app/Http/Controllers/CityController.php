@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Http\Controllers; /* Lecture 37 */
+namespace App\Http\Controllers; /* Part 37 */
 
-use Illuminate\Http\Request; /* Lecture 37 */
+use Illuminate\Http\Request; /* Part 37 */
 
-use App\Enjoythetrip\Gateways\BackendGateway; /* Lecture 37 */
-use App\Enjoythetrip\Interfaces\BackendRepositoryInterface; /* Lecture 37 */
+use App\Enjoythetrip\Gateways\BackendGateway; /* Part 37 */
+use App\Enjoythetrip\Interfaces\BackendRepositoryInterface; /* Part 37 */
 
-/* Lecture 37 */
+/* Part 37 */
 class CityController extends Controller
 {
 
-    /* Lecture 37 */
+    /* Part 37 */
     public function __construct(BackendGateway $backendGateway, BackendRepositoryInterface $backendRepository)
     {
         $this->middleware('CheckAdmin');
@@ -27,7 +27,7 @@ class CityController extends Controller
      */
     public function index()
     {
-        return view('backend.cities.index',['cities'=>$this->bR->getCities()]); /* Lecture 37 */
+        return view('backend.cities.index',['cities'=>$this->bR->getCities()]); /* Part 37 */
     }
 
     /**
@@ -37,7 +37,7 @@ class CityController extends Controller
      */
     public function create()
     {
-        return view('backend.cities.create'); /* Lecture 37 */
+        return view('backend.cities.create'); /* Part 37 */
     }
 
     /**
@@ -48,8 +48,8 @@ class CityController extends Controller
      */
     public function store(Request $request)
     {
-        $this->bG->createCity($request); /* Lecture 37 */
-        return redirect()->route('cities.index'); /* Lecture 37 */
+        $this->bG->createCity($request); /* Part 37 */
+        return redirect()->route('cities.index'); /* Part 37 */
     }
 
     /**
@@ -71,7 +71,7 @@ class CityController extends Controller
      */
     public function edit($id)
     {
-        return view('backend.cities.edit',['city'=>$this->bR->getCity($id)]); /* Lecture 37 */
+        return view('backend.cities.edit',['city'=>$this->bR->getCity($id)]); /* Part 37 */
     }
 
     /**
@@ -83,8 +83,8 @@ class CityController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->bG->updateCity($request, $id); /* Lecture 37 */
-        return redirect()->route('cities.index'); /* Lecture 37 */
+        $this->bG->updateCity($request, $id); /* Part 37 */
+        return redirect()->route('cities.index'); /* Part 37 */
     }
 
     /**
@@ -95,7 +95,7 @@ class CityController extends Controller
      */
     public function destroy($id)
     {
-        $this->bR->deleteCity($id); /* Lecture 37 */
-        return redirect()->route('cities.index'); /* Lecture 37 */
+        $this->bR->deleteCity($id); /* Part 37 */
+        return redirect()->route('cities.index'); /* Part 37 */
     }
 }

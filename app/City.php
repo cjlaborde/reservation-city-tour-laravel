@@ -5,20 +5,20 @@
 |--------------------------------------------------------------------------
 */
 
-namespace App; /* Lecture 14 */
+namespace App; /* Part 14 */
 
-use Illuminate\Database\Eloquent\Model; /* Lecture 14 */
+use Illuminate\Database\Eloquent\Model; /* Part 14 */
 
-/* Lecture 14 */
+/* Part 14 */
 class City extends Model
 {
-    //protected $table = 'table_name'; /* Lecture 14 */
+    //protected $table = 'table_name'; /* Part 14 */
 
-    protected $guarded = []; /* Lecture 38 */
-    public $timestamps = false; /* Lecture 38 */
+    protected $guarded = []; /* Part 38 */
+    public $timestamps = false; /* Part 38 */
 
 
-    /* Lecture 19 */
+    /* Part 19 */
     public function rooms()
     {
         return $this->hasManyThrough('App\Room', 'App\TouristObject','city_id','object_id');

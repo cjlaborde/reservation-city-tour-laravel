@@ -1,6 +1,6 @@
 <?php
 
-/* Lecture 6 */
+/* Part 6 */
 return [
 
     'article' => 'articulo',
@@ -12,8 +12,8 @@ return [
     'saveobject' => 'guardarobjecto',
     'profile' => 'perfil',
     'saveroom' => 'guardarhabitacion',
-    'deleteobject' => 'borrarobjecto', /* Lecture 46 */
-    'deleteroom' => 'borrarhabitacion', /* Lecture 47 */
+    'deleteobject' => 'borrarobjecto', /* Part 46 */
+    'deleteroom' => 'borrarhabitacion', /* Part 47 */
 
 
 ];

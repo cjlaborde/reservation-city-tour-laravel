@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Enjoythetrip\Presenters; /* Lecture 16 */
+namespace App\Enjoythetrip\Presenters; /* Part 16 */
 
-/* Lecture 16 */
+/* Part 16 */
 trait UserPresenter {
 
-    /* Lecture 16 */
+    /* Part 16 */
     public function getFullNameAttribute()
     {
         return $this->name.' '.$this->susername;

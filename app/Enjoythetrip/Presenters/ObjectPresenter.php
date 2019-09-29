@@ -4,9 +4,9 @@
 | app/Enjoythetrip/Presenters/ObjectPresenter.php *** Copyright netprogs.pl | available only at Udemy.com | further distribution is prohibited  ***
 |--------------------------------------------------------------------------
 */
-namespace App\Enjoythetrip\Presenters; /* Lecture 23 */
+namespace App\Enjoythetrip\Presenters; /* Part 23 */
 
-/* Lecture 23 */
+/* Part 23 */
 trait ObjectPresenter {
     
     public function getNameAttribute($value)

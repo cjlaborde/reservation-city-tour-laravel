@@ -1,11 +1,11 @@
 <?php
-namespace App\Enjoythetrip\ViewComposers; /* Lecture 49 */
+namespace App\Enjoythetrip\ViewComposers; /* Part 49 */
 
-use Illuminate\View\View; /* Lecture 49 */
-use App\Notification; /* Lecture 49 */
-use Illuminate\Support\Facades\Auth; /* Lecture 49 */
+use Illuminate\View\View; /* Part 49 */
+use App\Notification; /* Part 49 */
+use Illuminate\Support\Facades\Auth; /* Part 49 */
 
- /* Lecture 49 */
+ /* Part 49 */
 class BackendComposer
 {
 

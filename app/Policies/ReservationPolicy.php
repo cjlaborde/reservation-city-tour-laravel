@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Policies; /* Lecture 35 */
+namespace App\Policies; /* Part 35 */
 
-use App\{User,Reservation}; /* Lecture 35 */
-use Illuminate\Auth\Access\HandlesAuthorization; /* Lecture 35 */
+use App\{User,Reservation}; /* Part 35 */
+use Illuminate\Auth\Access\HandlesAuthorization; /* Part 35 */
 
-/* Lecture 35 */
+/* Part 35 */
 class ReservationPolicy
 {
     use HandlesAuthorization;
@@ -20,7 +20,7 @@ class ReservationPolicy
         //
     }
 
-    /* Lecture 35 */
+    /* Part 35 */
     public function reservation(User $user, Reservation $reservation)
     {
         if($user->hasRole(['owner','admin']))

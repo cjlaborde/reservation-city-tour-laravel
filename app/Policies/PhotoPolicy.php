@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Policies; /* Lecture 39 */
+namespace App\Policies; /* Part 39 */
 
-use App\{User,Photo}; /* Lecture 39 */
-use Illuminate\Auth\Access\HandlesAuthorization; /* Lecture 39 */
+use App\{User,Photo}; /* Part 39 */
+use Illuminate\Auth\Access\HandlesAuthorization; /* Part 39 */
 
 
-/* Lecture 39 */
+/* Part 39 */
 class PhotoPolicy
 {
     use HandlesAuthorization;
@@ -22,7 +22,7 @@ class PhotoPolicy
     }
 
 
-    /* Lecture 39 */
+    /* Part 39 */
     public function checkOwner(User $user, Photo $photo)
     {
         if($photo->photoable_type == 'App\User')

@@ -2,11 +2,11 @@
 
 namespace App\Http\Middleware;
 
-use Closure; /* Lecture 36 */
-use Illuminate\Support\Facades\Auth; /* Lecture 36 */
+use Closure; /* Part 36 */
+use Illuminate\Support\Facades\Auth; /* Part 36 */
 
 
- /* Lecture 36 */
+ /* Part 36 */
 class CheckOwner
 {
     /**

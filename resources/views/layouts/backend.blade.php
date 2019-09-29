@@ -18,7 +18,7 @@
         <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
         <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
 
-        <link rel="stylesheet" href="{{ asset('css/app.css') }}">  <!-- Lecture 5  -->
+        <link rel="stylesheet" href="{{ asset('css/app.css') }}">  <!-- Part 5  -->
 
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
@@ -30,12 +30,12 @@
 
 
 
-        <!-- Lecture 27 -->
+        <!-- Part 27 -->
         <script>
-        var base_url = '{{ url('/admin') }}'; <?php /* Lecture 32 admin argument */?>
+        var base_url = '{{ url('/admin') }}'; <?php /* Part 32 admin argument */?>
 
 
-        <!-- Lecture 34 -->
+        <!-- Part 34 -->
         <?php
         if (isset($_COOKIE['scroll_val'])) {
 
@@ -65,7 +65,7 @@
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
 
-                        <!-- Lecture 49 -->
+                        <!-- Part 49 -->
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                 @if( $ncounter = count($notifications->where('status',0)) )
@@ -86,10 +86,10 @@
 
                             </ul>
                         </li>
-                        <li><p class="navbar-text">{{ Auth::user()->FullName /* Lecture 34 */ }}</p></li>
+                        <li><p class="navbar-text">{{ Auth::user()->FullName /* Part 34 */ }}</p></li>
                         <li><a href="{{ route('profile') }}">Profile</a></li>
 
-                        <!-- Lecture 34 -->
+                        <!-- Part 34 -->
                         <li>
                             <a href="{{ route('logout') }}"
                                onclick="event.preventDefault();
@@ -113,7 +113,7 @@
                     <ul class="nav nav-sidebar">
                         <li class="active"><a href="{{ route('adminHome') }}">Booking calendar <span class="sr-only">(current)</span></a></li>
 
-                        <!-- Lecture 36 -->
+                        <!-- Part 36 -->
                         @if( Auth::user()->hasRole(['owner','admin'])  )
                         <li><a href="{{ route('myObjects') }}">My tourist objects</a></li>
                         <li><a href="{{ route('saveObject') }}">Add a new tourist object</a></li>
@@ -127,7 +127,7 @@
 
                 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
-                    <!-- Lecture 38 -->
+                    <!-- Part 38 -->
                     @if ($errors->any())
                     <br>
                     <div class="alert alert-danger">
@@ -140,9 +140,9 @@
                     @endif
 
 
-                    <br> <!-- Lecture 35 -->
+                    <br> <!-- Part 35 -->
 
-                    <!-- Lecture 35 -->
+                    <!-- Part 35 -->
                     @if(Session::has('message'))
                     <br>
                     <div class="alert {{ Session::get('alert-class', 'alert-info') }} alert-dismissible show" role="alert">
@@ -153,7 +153,7 @@
                     </div>
                     @endif
 
-                    @yield('content') <!-- Lecture 5 -->
+                    @yield('content') <!-- Part 5 -->
                 </div>
             </div>
         </div>
@@ -165,11 +165,11 @@
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
-        <script src="{{ asset('js/app.js') }}"></script> <!-- Lecture 5 -->
-        <script src="{{ asset('js/admin.js') }}"></script> <!-- Lecture 5 -->
-        @stack('scripts') <!-- Lecture 30 -->
+        <script src="{{ asset('js/app.js') }}"></script> <!-- Part 5 -->
+        <script src="{{ asset('js/admin.js') }}"></script> <!-- Part 5 -->
+        @stack('scripts') <!-- Part 30 -->
 
-       <!-- Lecture 34 -->
+       <!-- Part 34 -->
         <script>
 
         $(function () {

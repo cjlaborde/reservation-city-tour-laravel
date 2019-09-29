@@ -12,51 +12,51 @@
 */
 
 
-Route::get('/','FrontendController@index')->name('home'); /* Lecture 6 */
-Route::get(trans('routes.object').'/{id}','FrontendController@object')->name('object'); /* Lecture 5 Lecture 15 {id}  */
-Route::post(trans('routes.roomsearch'),'FrontendController@roomsearch')->name('roomSearch'); /* Lecture 5 Lecture 18 get->post */
-Route::get(trans('routes.room').'/{id}','FrontendController@room')->name('room'); /* Lecture 6 Lecture 19 {id} */
-Route::get(trans('routes.article').'/{id}','FrontendController@article')->name('article'); /* Lecture 6 Lecture 22 {id} */
-Route::get(trans('routes.person').'/{id}','FrontendController@person')->name('person'); /* Lecture 6 Lecture 23 {id} */
+Route::get('/','FrontendController@index')->name('home'); /* Part 6 */
+Route::get(trans('routes.object').'/{id}','FrontendController@object')->name('object'); /* Part 5 Part 15 {id}  */
+Route::post(trans('routes.roomsearch'),'FrontendController@roomsearch')->name('roomSearch'); /* Part 5 Part 18 get->post */
+Route::get(trans('routes.room').'/{id}','FrontendController@room')->name('room'); /* Part 6 Part 19 {id} */
+Route::get(trans('routes.article').'/{id}','FrontendController@article')->name('article'); /* Part 6 Part 22 {id} */
+Route::get(trans('routes.person').'/{id}','FrontendController@person')->name('person'); /* Part 6 Part 23 {id} */
 
-Route::get('/searchCities', 'FrontendController@searchCities'); /* Lecture 17 */
-Route::get('/ajaxGetRoomReservations/{id}', 'FrontendController@ajaxGetRoomReservations'); /* Lecture 20 */
+Route::get('/searchCities', 'FrontendController@searchCities'); /* Part 17 */
+Route::get('/ajaxGetRoomReservations/{id}', 'FrontendController@ajaxGetRoomReservations'); /* Part 20 */
 
-Route::get('/like/{likeable_id}/{type}', 'FrontendController@like')->name('like'); /* Lecture 24 */
-Route::get('/unlike/{likeable_id}/{type}', 'FrontendController@unlike')->name('unlike'); /* Lecture 24 */
+Route::get('/like/{likeable_id}/{type}', 'FrontendController@like')->name('like'); /* Part 24 */
+Route::get('/unlike/{likeable_id}/{type}', 'FrontendController@unlike')->name('unlike'); /* Part 24 */
 
-Route::post('/addComment/{commentable_id}/{type}', 'FrontendController@addComment')->name('addComment'); /* Lecture 25 */
-Route::post('/makeReservation/{room_id}/{city_id}', 'FrontendController@makeReservation')->name('makeReservation'); /* Lecture 26 */
+Route::post('/addComment/{commentable_id}/{type}', 'FrontendController@addComment')->name('addComment'); /* Part 25 */
+Route::post('/makeReservation/{room_id}/{city_id}', 'FrontendController@makeReservation')->name('makeReservation'); /* Part 26 */
 
 
-Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){  /* Lecture 6 Lecture 7 'middleware'=>'auth' */
+Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){  /* Part 6 Part 7 'middleware'=>'auth' */
 
   //for json mobile
-  Route::get('/getNotifications', 'BackendController@getNotifications'); /* Lecture 53 */
-  Route::post('/setReadNotifications', 'BackendController@setReadNotifications'); /* Lecture 53 */
+  Route::get('/getNotifications', 'BackendController@getNotifications'); /* Part 53 */
+  Route::post('/setReadNotifications', 'BackendController@setReadNotifications'); /* Part 53 */
 
-  Route::get('/','BackendController@index')->name('adminHome'); /* Lecture 6 */
-  Route::get(trans('routes.myobjects'),'BackendController@myobjects')->name('myObjects'); /* Lecture 6 */
-  Route::match(['GET','POST'],trans('routes.saveobject').'/{id?}','BackendController@saveObject')->name('saveObject'); /* Lecture 6 Lecture 41 match(['GET','POST'];/{id?} */
-  Route::match(['GET','POST'],trans('routes.profile'),'BackendController@profile')->name('profile'); /* Lecture 6  Lecture 39 match(['GET','POST'] */
-  Route::get('/deletePhoto/{id}', 'BackendController@deletePhoto')->name('deletePhoto'); /* Lecture 39 */
-  Route::match(['GET','POST'],trans('routes.saveroom').'/{id?}', 'BackendController@saveRoom')->name('saveRoom'); /* Lecture 47 */
-  Route::get(trans('routes.deleteroom').'/{id}', 'BackendController@deleteRoom')->name('deleteRoom'); /* Lecture 47 */
+  Route::get('/','BackendController@index')->name('adminHome'); /* Part 6 */
+  Route::get(trans('routes.myobjects'),'BackendController@myobjects')->name('myObjects'); /* Part 6 */
+  Route::match(['GET','POST'],trans('routes.saveobject').'/{id?}','BackendController@saveObject')->name('saveObject'); /* Part 6 Part 41 match(['GET','POST'];/{id?} */
+  Route::match(['GET','POST'],trans('routes.profile'),'BackendController@profile')->name('profile'); /* Part 6  Part 39 match(['GET','POST'] */
+  Route::get('/deletePhoto/{id}', 'BackendController@deletePhoto')->name('deletePhoto'); /* Part 39 */
+  Route::match(['GET','POST'],trans('routes.saveroom').'/{id?}', 'BackendController@saveRoom')->name('saveRoom'); /* Part 47 */
+  Route::get(trans('routes.deleteroom').'/{id}', 'BackendController@deleteRoom')->name('deleteRoom'); /* Part 47 */
 
-  Route::get('/deleteArticle/{id}', 'BackendController@deleteArticle')->name('deleteArticle'); /* Lecture 44 */
-  Route::post('/saveArticle/{id?}', 'BackendController@saveArticle')->name('saveArticle'); /* Lecture 44 */
+  Route::get('/deleteArticle/{id}', 'BackendController@deleteArticle')->name('deleteArticle'); /* Part 44 */
+  Route::post('/saveArticle/{id?}', 'BackendController@saveArticle')->name('saveArticle'); /* Part 44 */
 
-  Route::get('/ajaxGetReservationData', 'BackendController@ajaxGetReservationData'); /* Lecture 30 */
-  Route::get('/ajaxSetReadNotification', 'BackendController@ajaxSetReadNotification'); /* Lecture 50 */
-  Route::get('/ajaxGetNotShownNotifications', 'BackendController@ajaxGetNotShownNotifications'); /* Lecture 51 */
-  Route::get('/ajaxSetShownNotifications', 'BackendController@ajaxSetShownNotifications'); /* Lecture 52 */
+  Route::get('/ajaxGetReservationData', 'BackendController@ajaxGetReservationData'); /* Part 30 */
+  Route::get('/ajaxSetReadNotification', 'BackendController@ajaxSetReadNotification'); /* Part 50 */
+  Route::get('/ajaxGetNotShownNotifications', 'BackendController@ajaxGetNotShownNotifications'); /* Part 51 */
+  Route::get('/ajaxSetShownNotifications', 'BackendController@ajaxSetShownNotifications'); /* Part 52 */
 
-  Route::get('/confirmReservation/{id}', 'BackendController@confirmReservation')->name('confirmReservation'); /* Lecture 33 */
-  Route::get('/deleteReservation/{id}', 'BackendController@deleteReservation')->name('deleteReservation'); /* Lecture 33 */
+  Route::get('/confirmReservation/{id}', 'BackendController@confirmReservation')->name('confirmReservation'); /* Part 33 */
+  Route::get('/deleteReservation/{id}', 'BackendController@deleteReservation')->name('deleteReservation'); /* Part 33 */
 
-  Route::resource('cities', 'CityController'); /* Lecture 37 */
+  Route::resource('cities', 'CityController'); /* Part 37 */
 
-  Route::get(trans('routes.deleteobject').'/{id}', 'BackendController@deleteObject')->name('deleteObject'); /* Lecture 46 */
+  Route::get(trans('routes.deleteobject').'/{id}', 'BackendController@deleteObject')->name('deleteObject'); /* Part 46 */
 
 
 
@@ -66,4 +66,4 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){  /* Lecture 6 
 
 Auth::routes();
 
-//Route::get('/home', 'HomeController@index')->name('home');  /* Lecture 7 */
+//Route::get('/home', 'HomeController@index')->name('home');  /* Part 7 */

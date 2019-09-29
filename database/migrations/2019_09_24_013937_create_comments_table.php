@@ -16,12 +16,12 @@ class CreateCommentsTable extends Migration
         Schema::create('comments', function (Blueprint $table) {
             
             $table->bigIncrements('id');
-            $table->text('content'); /* Lecture 8 */
-            $table->string('commentable_type'); /* Lecture 8 */
-            $table->bigInteger('commentable_id'); /* Lecture 8 */
-            $table->integer('rating'); /* Lecture 8 */
-            $table->bigInteger('user_id')->unsigned(); /* Lecture 8 */
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade'); /* Lecture 8 */
+            $table->text('content'); /* Part 8 */
+            $table->string('commentable_type'); /* Part 8 */
+            $table->bigInteger('commentable_id'); /* Part 8 */
+            $table->integer('rating'); /* Part 8 */
+            $table->bigInteger('user_id')->unsigned(); /* Part 8 */
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade'); /* Part 8 */
             
         });
     }

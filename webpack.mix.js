@@ -12,8 +12,8 @@ const mix = require('laravel-mix');
  */
 
 mix.scripts(['resources/js/app.js'], 'public/js/app.js')
-    .babel(['resources/js/admin.js'], 'public/js/admin.js') /* Lecture 4 */
+    .babel(['resources/js/admin.js'], 'public/js/admin.js') /* Part 4 */
     .sass('resources/sass/app.scss', 'public/css')
     .options({
-        processCssUrls: false /* Lecture 4 */
+        processCssUrls: false /* Part 4 */
     });

@@ -4,49 +4,49 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Enjoythetrip\Interfaces\BackendRepositoryInterface; /* Lecture 27 */
-use App\Enjoythetrip\Gateways\BackendGateway; /* Lecture 27 */
-use Illuminate\Support\Facades\Auth; /* Lecture 39 */
-use Illuminate\Support\Facades\Storage; /* Lecture 40 */
-use App\Events\ReservationConfirmedEvent; /* Lecture 54 */
-use Illuminate\Support\Facades\Cache; /* Lecture 55 */
+use App\Enjoythetrip\Interfaces\BackendRepositoryInterface; /* Part 27 */
+use App\Enjoythetrip\Gateways\BackendGateway; /* Part 27 */
+use Illuminate\Support\Facades\Auth; /* Part 39 */
+use Illuminate\Support\Facades\Storage; /* Part 40 */
+use App\Events\ReservationConfirmedEvent; /* Part 54 */
+use Illuminate\Support\Facades\Cache; /* Part 55 */
 
 
 class BackendController extends Controller
 {
-    use \App\Enjoythetrip\Traits\Ajax; /* Lecture 30 */
+    use \App\Enjoythetrip\Traits\Ajax; /* Part 30 */
 
-    /* Lecture 27 */
+    /* Part 27 */
     public function __construct(BackendGateway $backendGateway, BackendRepositoryInterface $backendRepository)
     {
 
-        $this->middleware('CheckOwner')->only(['confirmReservation','saveRoom','saveObject','myObjects']);/* Lecture 36 */
+        $this->middleware('CheckOwner')->only(['confirmReservation','saveRoom','saveObject','myObjects']);/* Part 36 */
 
         $this->bG = $backendGateway;
         $this->bR = $backendRepository;
     }
 
 
-    /* Lecture 6 */
-    public function index(Request $request /* Lecture 27 */)
+    /* Part 6 */
+    public function index(Request $request /* Part 27 */)
     {
-        $objects = $this->bG->getReservations($request); /* Lecture 27 */
-        return view('backend.index',['objects'=>$objects]/* Lecture 27 */);
+        $objects = $this->bG->getReservations($request); /* Part 27 */
+        return view('backend.index',['objects'=>$objects]/* Part 27 */);
     }
 
-    /* Lecture 6 */
-    public function myobjects(Request $request /* Lecture 46 */)
+    /* Part 6 */
+    public function myobjects(Request $request /* Part 46 */)
     {
-        $objects = $this->bR->getMyObjects($request); /* Lecture 46 */
-        //dd($objects); /* Lecture 46 */
+        $objects = $this->bR->getMyObjects($request); /* Part 46 */
+        //dd($objects); /* Part 46 */
 
-        return view('backend.myobjects',['objects'=>$objects]/* Lecture 46 */);
+        return view('backend.myobjects',['objects'=>$objects]/* Part 46 */);
     }
 
-    /* Lecture 6 */
-    public function profile(Request $request /* Lecture 39 */)
+    /* Part 6 */
+    public function profile(Request $request /* Part 39 */)
     {
-        /* Lecture 39 */
+        /* Part 39 */
         if ($request->isMethod('post'))
         {
 
@@ -54,9 +54,9 @@ class BackendController extends Controller
 
             if ($request->hasFile('userPicture'))
             {
-                $path = $request->file('userPicture')->store('users', 'public'); /* Lecture 40 */
+                $path = $request->file('userPicture')->store('users', 'public'); /* Part 40 */
 
-                /* Lecture 40 */
+                /* Part 40 */
                 if (count($user->photos) != 0)
                 {
                     $photo = $this->bR->getPhoto($user->photos->first()->id);
@@ -78,31 +78,31 @@ class BackendController extends Controller
             return redirect()->back();
         }
 
-        return view('backend.profile',['user'=>Auth::user()]/* Lecture 39 */);
+        return view('backend.profile',['user'=>Auth::user()]/* Part 39 */);
     }
 
-    /* Lecture 39 */
+    /* Part 39 */
     public function deletePhoto($id)
     {
 
-        $photo = $this->bR->getPhoto($id); /* Lecture 40 */
+        $photo = $this->bR->getPhoto($id); /* Part 40 */
 
         $this->authorize('checkOwner', $photo);
 
-        $path = $this->bR->deletePhoto($photo); /* Lecture 40 */
+        $path = $this->bR->deletePhoto($photo); /* Part 40 */
 
-        Storage::disk('public')->delete($path); /* Lecture 40 */
+        Storage::disk('public')->delete($path); /* Part 40 */
 
-        Cache::flush(); /* Lecture 55 */
+        Cache::flush(); /* Part 55 */
 
         return redirect()->back();
     }
 
 
-    /* Lecture 6 */
-    public function saveobject($id = null, Request $request /* Lecture 41 two args */)
+    /* Part 6 */
+    public function saveobject($id = null, Request $request /* Part 41 two args */)
     {
-        /* Lecture 41 */
+        /* Part 41 */
         if($request->isMethod('post'))
         {
             if($id)
@@ -110,7 +110,7 @@ class BackendController extends Controller
 
             $this->bG->saveObject($id, $request);
 
-            Cache::flush(); /* Lecture 55 */
+            Cache::flush(); /* Part 55 */
 
             if($id)
             return redirect()->back();
@@ -120,14 +120,14 @@ class BackendController extends Controller
         }
 
 
-        /* Lecture 41 */
+        /* Part 41 */
         if($id)
         return view('backend.saveobject',['object'=>$this->bR->getObject($id),'cities'=>$this->bR->getCities()]);
         else
         return view('backend.saveobject',['cities'=>$this->bR->getCities()]);
     }
 
-    /* Lecture 47 */
+    /* Part 47 */
     public function saveRoom($id = null, Request $request)
     {
 
@@ -140,7 +140,7 @@ class BackendController extends Controller
 
             $this->bG->saveRoom($id, $request);
 
-            Cache::flush(); /* Lecture 55 */
+            Cache::flush(); /* Part 55 */
 
             if($id)
             return redirect()->back();
@@ -155,112 +155,112 @@ class BackendController extends Controller
         return view('backend.saveroom',['object_id'=>$request->input('object_id')]);
     }
 
-    /* Lecture 47 */
+    /* Part 47 */
     public function deleteRoom($id)
     {
-        $room =  $this->bR->getRoom($id); /* Lecture 48 */
+        $room =  $this->bR->getRoom($id); /* Part 48 */
 
-        $this->authorize('checkOwner', $room); /* Lecture 48 */
+        $this->authorize('checkOwner', $room); /* Part 48 */
 
-        $this->bR->deleteRoom($room); /* Lecture 48 */
+        $this->bR->deleteRoom($room); /* Part 48 */
 
-        Cache::flush(); /* Lecture 55 */
+        Cache::flush(); /* Part 55 */
 
-        return redirect()->back(); /* Lecture 48 */
+        return redirect()->back(); /* Part 48 */
     }
 
 
-    /* Lecture 33 */
+    /* Part 33 */
     public function confirmReservation($id)
     {
-        $reservation = $this->bR->getReservation($id); /* Lecture 35 */
+        $reservation = $this->bR->getReservation($id); /* Part 35 */
 
-        $this->authorize('reservation', $reservation); /* Lecture 35 */
+        $this->authorize('reservation', $reservation); /* Part 35 */
 
-        $this->bR->confirmReservation($reservation); /* Lecture 35 */
+        $this->bR->confirmReservation($reservation); /* Part 35 */
 
-        $this->flashMsg ('success', __('Reservation has been confirmed'));  /* Lecture 35 */
+        $this->flashMsg ('success', __('Reservation has been confirmed'));  /* Part 35 */
 
-        event( new ReservationConfirmedEvent($reservation) ); /* Lecture 54 */
+        event( new ReservationConfirmedEvent($reservation) ); /* Part 54 */
 
-        if (!\Request::ajax()) /* Lecture 35 */
-        return redirect()->back(); /* Lecture 35 */
+        if (!\Request::ajax()) /* Part 35 */
+        return redirect()->back(); /* Part 35 */
     }
 
 
-    /* Lecture 33 */
+    /* Part 33 */
     public function deleteReservation($id)
     {
-        $reservation = $this->bR->getReservation($id); /* Lecture 35 */
+        $reservation = $this->bR->getReservation($id); /* Part 35 */
 
-        $this->authorize('reservation', $reservation); /* Lecture 35 */
+        $this->authorize('reservation', $reservation); /* Part 35 */
 
-        $this->bR->deleteReservation($reservation); /* Lecture 35 */
+        $this->bR->deleteReservation($reservation); /* Part 35 */
 
-        $this->flashMsg ('success', __('Reservation has been deleted'));  /* Lecture 35 */
+        $this->flashMsg ('success', __('Reservation has been deleted'));  /* Part 35 */
 
-        if (!\Request::ajax()) /* Lecture 35 */
-        return redirect()->back(); /* Lecture 34 */
+        if (!\Request::ajax()) /* Part 35 */
+        return redirect()->back(); /* Part 34 */
     }
 
 
-    /* Lecture 44 */
+    /* Part 44 */
     public function deleteArticle($id)
     {
-        $article =  $this->bR->getArticle($id); /* Lecture 45 */
+        $article =  $this->bR->getArticle($id); /* Part 45 */
 
-        $this->authorize('checkOwner', $article); /* Lecture 45 */
+        $this->authorize('checkOwner', $article); /* Part 45 */
 
-        $this->bR->deleteArticle($article); /* Lecture 45 */
+        $this->bR->deleteArticle($article); /* Part 45 */
 
-        Cache::flush(); /* Lecture 55 */
+        Cache::flush(); /* Part 55 */
 
-        return redirect()->back(); /* Lecture 45 */
+        return redirect()->back(); /* Part 45 */
     }
 
 
-    /* Lecture 44 */
-    public function saveArticle($object_id = null, Request $request /* Lecture 45 */)
+    /* Part 44 */
+    public function saveArticle($object_id = null, Request $request /* Part 45 */)
     {
-        /* Lecture 45 */
+        /* Part 45 */
         if(!$object_id)
         {
            $this->flashMsg ('danger', __('First add an object'));
            return redirect()->back();
         }
 
-        $this->authorize('checkOwner', $this->bR->getObject($object_id)); /* Lecture 45 */
+        $this->authorize('checkOwner', $this->bR->getObject($object_id)); /* Part 45 */
 
-        $this->bG->saveArticle($object_id,$request); /* Lecture 45 */
+        $this->bG->saveArticle($object_id,$request); /* Part 45 */
 
-        Cache::flush(); /* Lecture 55 */
+        Cache::flush(); /* Part 55 */
 
-        return redirect()->back(); /* Lecture 45 */
+        return redirect()->back(); /* Part 45 */
     }
 
 
-    /* Lecture 46 */
+    /* Part 46 */
     public function deleteObject($id)
     {
         $this->authorize('checkOwner', $this->bR->getObject($id));
 
         $this->bR->deleteObject($id);
 
-        Cache::flush(); /* Lecture 55 */
+        Cache::flush(); /* Part 55 */
 
         return redirect()->back();
 
     }
 
 
-    /* Lecture 53 */
+    /* Part 53 */
     public function getNotifications()
     {
         return response()->json( $this->bR->getNotifications() ); // for mobile
     }
 
 
-    /* Lecture 53 */
+    /* Part 53 */
     public function setReadNotifications(Request $request)
     {
         return  $this->bR->setReadNotifications($request); // for mobile

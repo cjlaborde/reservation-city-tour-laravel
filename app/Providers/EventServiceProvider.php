@@ -13,7 +13,7 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
 
-    /* Lecture 54 */
+    /* Part 54 */
     protected $listen = [
         'App\Events\OrderPlacedEvent' => [
             'App\Listeners\OrderPlacedEventListener',

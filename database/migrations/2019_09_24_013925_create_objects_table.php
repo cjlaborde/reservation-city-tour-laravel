@@ -16,12 +16,12 @@ class CreateObjectsTable extends Migration
         Schema::create('objects', function (Blueprint $table) {
             
             $table->bigIncrements('id');
-            $table->string('name'); /* Lecture 8 */
-            $table->bigInteger('user_id')->unsigned(); /* Lecture 8 */
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade'); /* Lecture 8 */
-            $table->bigInteger('city_id')->unsigned(); /* Lecture 8 */
-            $table->foreign('city_id')->references('id')->on('cities')->onDelete('cascade'); /* Lecture 8 */
-            $table->text('description'); /* Lecture 8 */
+            $table->string('name'); /* Part 8 */
+            $table->bigInteger('user_id')->unsigned(); /* Part 8 */
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade'); /* Part 8 */
+            $table->bigInteger('city_id')->unsigned(); /* Part 8 */
+            $table->foreign('city_id')->references('id')->on('cities')->onDelete('cascade'); /* Part 8 */
+            $table->text('description'); /* Part 8 */
         });
     }
 

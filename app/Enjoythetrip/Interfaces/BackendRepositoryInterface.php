@@ -5,10 +5,10 @@
 |--------------------------------------------------------------------------
 */
 
-namespace App\Enjoythetrip\Interfaces; /* Lecture 27 */
+namespace App\Enjoythetrip\Interfaces; /* Part 27 */
 
 
-/* Lecture 27 */
+/* Part 27 */
 interface BackendRepositoryInterface   {
     
 
