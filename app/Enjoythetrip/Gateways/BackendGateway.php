@@ -137,5 +137,45 @@ class BackendGateway {
     }
 
 
+    /* Lecture 47 */
+    public function saveRoom($id, $request)
+    {
+
+        $this->validate($request,[
+        'room_number'=>"required|integer",
+        'room_size'=>"required|integer",
+        'price'=>"required|integer",
+        'description'=>"required|string|min:100",
+        ]);
+
+        if($id)
+        {
+            $room = $this->bR->updateRoom($id,$request); /* Lecture 48 */
+
+        }
+        else
+        {
+            $room = $this->bR->createNewRoom($request); /* Lecture 48 */
+        }
+
+
+        if ($request->hasFile('roomPictures'))
+        {
+            $this->validate($request, \App\Photo::imageRules($request,'roomPictures'));
+
+            foreach($request->file('roomPictures') as $picture)
+            {
+                $path = $picture->store('rooms', 'public');
+
+                $this->bR->saveRoomPhotos($room, $path); /* Lecture 48 */
+            }
+
+        }
+
+            return $room; /* Lecture 48 */
+
+    }
+
+
 }
 

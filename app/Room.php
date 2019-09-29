@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model; /* Lecture 16 */
 /* Lecture 16 */
 class Room extends Model
 {
+    public $timestamps = false; /* Lecture 48 */
+
     /* Lecture 16 */
     public function photos()
     {

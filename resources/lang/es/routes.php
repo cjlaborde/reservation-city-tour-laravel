@@ -12,6 +12,8 @@ return [
     'saveobject' => 'guardarobjecto',
     'profile' => 'perfil',
     'saveroom' => 'guardarhabitacion',
+    'deleteobject' => 'borrarobjecto', /* Lecture 46 */
+    'deleteroom' => 'borrarhabitacion', /* Lecture 47 */
 
 
 ];

@@ -36,7 +36,8 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){  /* Lecture 6 
   Route::match(['GET','POST'],trans('routes.saveobject').'/{id?}','BackendController@saveObject')->name('saveObject'); /* Lecture 6 Lecture 41 match(['GET','POST'];/{id?} */
   Route::match(['GET','POST'],trans('routes.profile'),'BackendController@profile')->name('profile'); /* Lecture 6  Lecture 39 match(['GET','POST'] */
   Route::get('/deletePhoto/{id}', 'BackendController@deletePhoto')->name('deletePhoto'); /* Lecture 39 */
-  Route::get(trans('routes.saveroom'),'BackendController@saveRoom')->name('saveRoom'); /* Lecture 6 */
+  Route::match(['GET','POST'],trans('routes.saveroom').'/{id?}', 'BackendController@saveRoom')->name('saveRoom'); /* Lecture 47 */
+  Route::get(trans('routes.deleteroom').'/{id}', 'BackendController@deleteRoom')->name('deleteRoom'); /* Lecture 47 */
 
   Route::get('/deleteArticle/{id}', 'BackendController@deleteArticle')->name('deleteArticle'); /* Lecture 44 */
   Route::post('/saveArticle/{id?}', 'BackendController@saveArticle')->name('saveArticle'); /* Lecture 44 */
@@ -47,6 +48,8 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){  /* Lecture 6 
   Route::get('/deleteReservation/{id}', 'BackendController@deleteReservation')->name('deleteReservation'); /* Lecture 33 */
 
   Route::resource('cities', 'CityController'); /* Lecture 37 */
+
+  Route::get(trans('routes.deleteobject').'/{id}', 'BackendController@deleteObject')->name('deleteObject'); /* Lecture 46 */
 
 
 });

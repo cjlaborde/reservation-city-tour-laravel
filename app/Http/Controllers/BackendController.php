@@ -33,9 +33,12 @@ class BackendController extends Controller
     }
 
     /* Lecture 6 */
-    public function myobjects()
+    public function myobjects(Request $request /* Lecture 46 */)
     {
-        return view('backend.myobjects');
+        $objects = $this->bR->getMyObjects($request); /* Lecture 46 */
+        //dd($objects); /* Lecture 46 */
+
+        return view('backend.myobjects',['objects'=>$objects]/* Lecture 46 */);
     }
 
     /* Lecture 6 */
@@ -118,10 +121,42 @@ class BackendController extends Controller
         return view('backend.saveobject',['cities'=>$this->bR->getCities()]);
     }
 
-    /* Lecture 6 */
-    public function saveroom()
+    /* Lecture 47 */
+    public function saveRoom($id = null, Request $request)
     {
-        return view('backend.saveroom');
+
+        if($request->isMethod('post'))
+        {
+            if($id) // editing room
+            $this->authorize('checkOwner', $this->bR->getRoom($id));
+            else // adding a new room
+            $this->authorize('checkOwner', $this->bR->getObject($request->input('object_id')));
+
+            $this->bG->saveRoom($id, $request);
+
+            if($id)
+            return redirect()->back();
+            else
+            return redirect()->route('myObjects');
+
+        }
+
+        if($id)
+        return view('backend.saveroom',['room'=>$this->bR->getRoom($id)]);
+        else
+        return view('backend.saveroom',['object_id'=>$request->input('object_id')]);
+    }
+
+    /* Lecture 47 */
+    public function deleteRoom($id)
+    {
+        $room =  $this->bR->getRoom($id); /* Lecture 48 */
+
+        $this->authorize('checkOwner', $room); /* Lecture 48 */
+
+        $this->bR->deleteRoom($room); /* Lecture 48 */
+
+        return redirect()->back(); /* Lecture 48 */
     }
 
 
@@ -186,6 +221,18 @@ class BackendController extends Controller
         $this->bG->saveArticle($object_id,$request); /* Lecture 45 */
 
         return redirect()->back(); /* Lecture 45 */
+    }
+
+
+    /* Lecture 46 */
+    public function deleteObject($id)
+    {
+        $this->authorize('checkOwner', $this->bR->getObject($id));
+
+        $this->bR->deleteObject($id);
+
+        return redirect()->back();
+
     }
 
 

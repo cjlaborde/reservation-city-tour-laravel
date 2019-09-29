@@ -2,7 +2,7 @@
 namespace App\Enjoythetrip\Repositories; /* Lecture 27 */
 
 use App\Enjoythetrip\Interfaces\BackendRepositoryInterface;  /* Lecture 27 */
-use App\{TouristObject/* Lecture 28 */,Reservation/* Lecture 30 */,City/* Lecture 37 */,User/* Lecture 39 */,Photo/* Lecture 40 */,Address/* Lecture 42 */,Article/* Lecture 45 */};
+use App\{TouristObject/* Lecture 28 */,Reservation/* Lecture 30 */,City/* Lecture 37 */,User/* Lecture 39 */,Photo/* Lecture 40 */,Address/* Lecture 42 */,Article/* Lecture 45 */,Room/* Lecture 47 */};
 
 /* Lecture 27 */
 class BackendRepository implements BackendRepositoryInterface  {
@@ -259,6 +259,77 @@ class BackendRepository implements BackendRepositoryInterface  {
         return  $article->delete();
     }
 
+
+    /* Lecture 46 */
+    public function getMyObjects($request)
+    {
+        return TouristObject::where('user_id',$request->user()->id)->get();
+    }
+
+
+    /* Lecture 46 */
+    public function deleteObject($id)
+    {
+        return TouristObject::where('id',$id)->delete();
+    }
+
+
+    /* Lecture 47 */
+    public function getRoom($id)
+    {
+        return Room::find($id);
+    }
+
+
+    /* Lecture 48 */
+    public function updateRoom($id,$request)
+    {
+        $room = Room::find($id);
+        $room->room_number = $request->input('room_number');
+        $room->room_size = $request->input('room_size');
+        $room->price = $request->input('price');
+        $room->description = $request->input('description');
+
+        $room->save();
+
+        return $room;
+    }
+
+
+    /* Lecture 48 */
+    public function createNewRoom($request)
+    {
+        $room = new Room;
+        $object = TouristObject::find( $request->input('object_id') );
+        $room->object_id = $request->input('object_id') ;
+
+        $room->room_number = $request->input('room_number');
+        $room->room_size = $request->input('room_size');
+        $room->price = $request->input('price');
+        $room->description = $request->input('description');
+
+        $room->save();
+
+        $object->rooms()->save($room);
+
+        return $room;
+    }
+
+
+    /* Lecture 48 */
+    public function saveRoomPhotos(Room $room, string $path)
+    {
+        $photo = new Photo;
+        $photo->path = $path;
+        return $room->photos()->save($photo);
+    }
+
+
+    /* Lecture 48 */
+    public function deleteRoom(Room $room)
+    {
+        return $room->delete();
+    }
 
 }
 
