@@ -73,7 +73,7 @@ return [
 
         'redis' => [
             'driver' => 'redis',
-            'connection' => 'cache',
+            'connection' => 'default', /* Lecture 56 */
         ],
 
         'dynamodb' => [
